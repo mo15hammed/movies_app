@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/data/core/dio_helper.dart';
+import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
 
 void main() {
+  DioHelper.init();
+  MovieRemoteDataSource dataSource = MovieRemoteDataSourceImpl();
+  dataSource.getTrending();
+  dataSource.getPopular();
+  dataSource.getComingSoon();
+  dataSource.getPlayingNow();
+
   runApp(MyApp());
 }
 
