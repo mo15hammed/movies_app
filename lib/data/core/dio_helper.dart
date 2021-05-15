@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movies_app/data/core/api_constraints.dart';
+import 'package:movies_app/data/core/api_constants.dart';
 
 class DioHelper {
   static Dio _dio;
 
   static init() {
     _dio = Dio(
-        BaseOptions(baseUrl: ApiConstraints.BASE_URL, receiveDataWhenStatusError: true, headers: {
+        BaseOptions(baseUrl: ApiConstants.BASE_URL, receiveDataWhenStatusError: true, headers: {
       'Content-Type': 'application/json',
     }, queryParameters: {
-      'api_key': ApiConstraints.API_KEY,
+      'api_key': ApiConstants.API_KEY,
     }));
   }
 
