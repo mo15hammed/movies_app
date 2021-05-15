@@ -10,7 +10,9 @@ abstract class MovieRemoteDataSource {
 }
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
-  MovieRemoteDataSourceImpl();
+  MovieRemoteDataSourceImpl() {
+    DioHelper.init();
+  }
 
   @override
   Future<List<MovieModel>> getTrending() async {
