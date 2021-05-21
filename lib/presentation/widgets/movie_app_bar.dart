@@ -17,7 +17,6 @@ class MovieAppBar extends StatelessWidget {
         right: Sizes.dimen_4.w,
       ),
       child: Container(
-        // color: Colors.red,
         child: Row(
           children: [
             IconButton(
@@ -25,7 +24,9 @@ class MovieAppBar extends StatelessWidget {
                 'assets/svgs/menu.svg',
                 height: Sizes.dimen_12.h,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
             ),
             Expanded(
               child: Logo(

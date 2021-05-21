@@ -1,4 +1,4 @@
-import 'package:movies_app/presentation/journeys/home/movie_tabbes/tab.dart';
+import 'package:movies_app/presentation/journeys/home/movie_tabs/tab.dart';
 
 class MovieTabbedConstants {
   static const List<Tab> tabs = [

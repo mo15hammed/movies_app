@@ -21,7 +21,7 @@ class TabTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isSelected ? () {} : onTap,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.transparent,

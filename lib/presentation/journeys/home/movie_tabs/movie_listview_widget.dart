@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constraints/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
-import 'package:movies_app/data/core/api_constants.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
-import 'package:movies_app/presentation/journeys/home/movie_tabbes/movie_tab_card_widget.dart';
+import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_tab_card_widget.dart';
 
 class MovieListviewWidget extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -21,6 +19,7 @@ class MovieListviewWidget extends StatelessWidget {
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
+        clipBehavior: Clip.none,
         // shrinkWrap: true,
         itemBuilder: (context, index) {
           final movie = movies[index];
