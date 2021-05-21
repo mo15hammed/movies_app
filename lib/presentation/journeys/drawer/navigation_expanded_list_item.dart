@@ -15,24 +15,20 @@ class NavigationExpandedListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        child: ExpansionTile(
-
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
-          children: children
-              .map(
-                (e) => NavigationSubListItem(
-                  title: e,
-                  onPressed: () {},
-                ),
-              )
-              .toList(),
+    return Container(
+      child: ExpansionTile(
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.subtitle1,
         ),
+        children: children
+            .map(
+              (e) => NavigationSubListItem(
+                title: e,
+                onPressed: () => onPressed(children.indexOf(e)),
+              ),
+            )
+            .toList(),
       ),
     );
   }

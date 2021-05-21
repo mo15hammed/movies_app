@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/common/constraints/size_constraints.dart';
+import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 
 class NavigationListItem extends StatelessWidget {

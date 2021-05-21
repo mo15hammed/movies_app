@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movies_app/common/constraints/size_constraints.dart';
+import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 

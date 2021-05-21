@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/common/constraints/size_constraints.dart';
+import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/data/core/api_constants.dart';

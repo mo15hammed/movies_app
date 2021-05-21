@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/common/constraints/size_constraints.dart';
+import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/screenutils/screenutils.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';

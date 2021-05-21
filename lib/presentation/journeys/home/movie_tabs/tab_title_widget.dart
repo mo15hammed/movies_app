@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/common/constraints/size_constraints.dart';
+import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
+
+import '../../../app_localization.dart';
 
 class TabTitleWidget extends StatelessWidget {
   final String title;
@@ -33,7 +36,7 @@ class TabTitleWidget extends StatelessWidget {
           ),
         ),
         child: Text(
-          title,
+            title.t(context),
           style: isSelected
               ? Theme.of(context).textTheme.royalBlueSubtitle1
               : Theme.of(context).textTheme.subtitle1,

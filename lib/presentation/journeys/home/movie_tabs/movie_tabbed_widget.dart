@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/common/constraints/size_constraints.dart';
+import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_listview_widget.dart';
