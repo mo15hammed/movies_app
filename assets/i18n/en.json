@@ -2,8 +2,17 @@
   "fav_movies": "Favorite Movies",
   "language": "Language",
   "feedback": "Feedback",
-  "about": "Aboud",
+  "about": "About",
   "popular": "POPULAR",
   "now": "NOW",
-  "soon": "SOON"
+  "soon": "SOON",
+
+  "okay": "Okay",
+  "aboutDesc": "This product uses the TMDb API but is not certified by the TMDb. This app was created for educational purposes only.",
+
+  "retry": "Retry",
+  "somethingWrong": "Something Went Wrong...",
+  "checkNetwork": "Please check your network connection and press Retry button or put it in as a bug by pressing Feedback button.",
+
+  "noMovies": "Sorry, there are no movies under this section."
 }

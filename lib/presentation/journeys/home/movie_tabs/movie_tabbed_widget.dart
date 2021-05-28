@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
+import 'package:movies_app/common/constants/translation_constants.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_listview_widget.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_tabbed_constants.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_title_widget.dart';
+import 'package:movies_app/presentation/widgets/app_error_widget.dart';
 
 class MovieTabbedWidget extends StatefulWidget {
   const MovieTabbedWidget({Key key}) : super(key: key);
@@ -56,12 +59,36 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget> with SingleTicker
                     )
                     .toList(),
               ),
+              if (state is MovieTabLoading)
+                Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
               if (state is MovieTabChanged)
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_4.w),
-                    child: MovieListviewWidget(
-                      movies: state.movies,
+                    child: state.movies?.isEmpty ?? true
+                        ? Center(
+                            child: Text(
+                              TranslationConsts.noMovies.t(context),
+                              style: Theme.of(context).textTheme.subtitle1,
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        : MovieListviewWidget(
+                            movies: state.movies,
+                          ),
+                  ),
+                ),
+              if (state is MovieTabLoadError)
+                Expanded(
+                  child: AppErrorWidget(
+                    message: state.message,
+                    errorType: state.errorType,
+                    onRetryPressed: () => movieTabbedBloc.add(
+                      MovieTabChangedEvent(currentTabIndex: state.currentTabIndex),
                     ),
                   ),
                 ),

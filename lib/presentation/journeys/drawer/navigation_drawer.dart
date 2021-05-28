@@ -9,7 +9,10 @@ import 'package:movies_app/presentation/app_localization.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_expanded_list_item.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_list_item.dart';
+import 'package:movies_app/presentation/themes/theme_color.dart';
+import 'package:movies_app/presentation/widgets/app_dialog.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
+import 'package:wiredash/wiredash.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);
@@ -25,7 +28,10 @@ class NavigationDrawer extends StatelessWidget {
           )
         ],
       ),
-      width: Sizes.dimen_100.w,
+      width: MediaQuery.of(context).size.width * 0.8,
+      constraints: BoxConstraints(
+        maxWidth: Sizes.dimen_400,
+      ),
       child: SafeArea(
         child: Container(
           child: Column(
@@ -34,8 +40,8 @@ class NavigationDrawer extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(
-                    top: Sizes.dimen_8.h,
-                    bottom: Sizes.dimen_18.h,
+                    top: Sizes.dimen_14.h,
+                    bottom: Sizes.dimen_14.h,
                     start: Sizes.dimen_8.w,
                     end: Sizes.dimen_8.w,
                   ),
@@ -45,7 +51,14 @@ class NavigationDrawer extends StatelessWidget {
                 ),
               ),
               Container(
-                color: Theme.of(context).primaryColor,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).primaryColor.withOpacity(0.8),
+                      blurRadius: 4.0,
+                    )
+                  ],
+                ),
                 child: Column(
                   children: [
                     NavigationListItem(
@@ -62,11 +75,17 @@ class NavigationDrawer extends StatelessWidget {
                     ),
                     NavigationListItem(
                       title: TranslationConsts.feedback.t(context),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Wiredash.of(context).show();
+                      },
                     ),
                     NavigationListItem(
                       title: TranslationConsts.about.t(context),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        _showDialog(context);
+                      },
                     ),
                   ],
                 ),
@@ -75,6 +94,23 @@ class NavigationDrawer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AppDialog(
+          title: TranslationConsts.about.t(context),
+          desc: TranslationConsts.aboutDesc.t(context),
+          buttonText: TranslationConsts.okay.t(context),
+          image: Image.asset(
+            'assets/pngs/tmdb_logo.png',
+            height: Sizes.dimen_32.h,
+          ),
+        );
+      },
     );
   }
 }

@@ -45,27 +45,29 @@ class _MoviePageViewState extends State<MoviePageView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: Sizes.dimen_6.h),
-      height: ScreenUtil.defaultSize.height * 0.35,
-      child: PageView.builder(
-        physics: BouncingScrollPhysics(),
-        clipBehavior: Clip.none,
-        controller: _pageCtrl,
-        itemBuilder: (context, index) {
-          final movie = widget.movies[index];
-          return AnimatedMovieCardWidget(
-            movieId: movie.id,
-            posterPath: movie.posterPath,
-            pageCtrl: _pageCtrl,
-            index: index,
-          );
-        },
-        pageSnapping: true,
-        itemCount: widget.movies?.length ?? 0,
-        onPageChanged: (index) {
-          BlocProvider.of<MovieBackdropBloc>(context).add(MovieBackdropChangedEvent(widget.movies[index]));
-        },
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: Sizes.dimen_6.h),
+        // height: ScreenUtil.defaultSize.height * 0.35,
+        child: PageView.builder(
+          physics: BouncingScrollPhysics(),
+          clipBehavior: Clip.none,
+          controller: _pageCtrl,
+          itemBuilder: (context, index) {
+            final movie = widget.movies[index];
+            return AnimatedMovieCardWidget(
+              movieId: movie.id,
+              posterPath: movie.posterPath,
+              pageCtrl: _pageCtrl,
+              index: index,
+            );
+          },
+          pageSnapping: true,
+          itemCount: widget.movies?.length ?? 0,
+          onPageChanged: (index) {
+            BlocProvider.of<MovieBackdropBloc>(context).add(MovieBackdropChangedEvent(widget.movies[index]));
+          },
+        ),
       ),
     );
   }

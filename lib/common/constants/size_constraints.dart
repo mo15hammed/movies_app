@@ -5,6 +5,7 @@ class Sizes {
   static const double dimen_1 = 1.0;
   static const double dimen_2 = 2.0;
   static const double dimen_4 = 4.0;
+  static const double dimen_5 = 5.0;
   static const double dimen_6 = 6.0;
   static const double dimen_8 = 8.0;
   static const double dimen_10 = 10.0;
@@ -27,4 +28,6 @@ class Sizes {
   static const double dimen_200 = 200.0;
   static const double dimen_230 = 230.0;
   static const double dimen_300 = 300.0;
+  static const double dimen_400 = 400.0;
+  static const double dimen_500 = 500.0;
 }

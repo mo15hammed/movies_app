@@ -21,7 +21,7 @@ class MovieEntity extends Equatable {
   }) : assert(id != null, 'Movie id must not be null');
 
   @override
-  List<Object> get props => [id, title];
+  List<Object> get props => [id, title, backdropPath];
 
   @override
   bool get stringify => true;

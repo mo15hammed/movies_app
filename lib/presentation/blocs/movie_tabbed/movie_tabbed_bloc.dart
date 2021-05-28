@@ -30,7 +30,7 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
   ) async* {
     if (event is MovieTabChangedEvent) {
       Either<AppError, List<MovieEntity>> moviesEither;
-      yield MovieTabChanged(currentTabIndex: event.currentTabIndex, movies: []);
+      yield MovieTabLoading(currentTabIndex: event.currentTabIndex);
       switch (event.currentTabIndex) {
         case 0:
           moviesEither = await getPopular(NoParams());
@@ -42,9 +42,22 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
           moviesEither = await getComingSoon(NoParams());
           break;
       }
-
-      yield moviesEither.fold((l) => MovieTabLoadError(currentTabIndex: event.currentTabIndex), (movies) {
-        return MovieTabChanged(currentTabIndex: event.currentTabIndex, movies: movies);
+      // yield MovieTabLoadError(
+      //   message: 'l.message',
+      //   errorType: AppErrorType.api,
+      //   currentTabIndex: event.currentTabIndex,
+      // );
+      yield moviesEither.fold((l) {
+        return MovieTabLoadError(
+          message: l.message,
+          errorType: l.errorType,
+          currentTabIndex: event.currentTabIndex,
+        );
+      }, (movies) {
+        return MovieTabChanged(
+          currentTabIndex: event.currentTabIndex,
+          movies: movies,
+        );
       });
     }
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/common/constants/size_constraints.dart';
+import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/widgets/movie_app_bar.dart';
 import 'package:movies_app/presentation/widgets/separator.dart';
@@ -30,6 +32,7 @@ class MovieCarouselWidget extends StatelessWidget {
             ),
             MovieDataWidget(),
             Separator(),
+            SizedBox(height: Sizes.dimen_6.h),
           ],
         ),
       ],

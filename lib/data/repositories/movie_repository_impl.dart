@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
 import 'package:movies_app/data/models/movie_model.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
@@ -14,8 +17,14 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getTrending();
       return Right(movies);
-    } on Exception {
-      return Left(AppError('Something went wrong'));
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.other)
+        return Left(
+          AppError(errorType: AppErrorType.network),
+        );
+      return Left(
+        AppError(errorType: AppErrorType.api),
+      );
     }
   }
 
@@ -24,8 +33,14 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getPopular();
       return Right(movies);
-    } on Exception {
-      return Left(AppError('Something went wrong'));
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.other)
+        return Left(
+          AppError(errorType: AppErrorType.network),
+        );
+      return Left(
+        AppError(errorType: AppErrorType.api),
+      );
     }
   }
 
@@ -34,8 +49,14 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getComingSoon();
       return Right(movies);
-    } on Exception {
-      return Left(AppError('Something went wrong'));
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.other)
+        return Left(
+          AppError(errorType: AppErrorType.network),
+        );
+      return Left(
+        AppError(errorType: AppErrorType.api),
+      );
     }
   }
 
@@ -44,9 +65,14 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getPlayingNow();
       return Right(movies);
-    } on Exception {
-      return Left(AppError('Something went wrong'));
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.other)
+        return Left(
+          AppError(errorType: AppErrorType.network),
+        );
+      return Left(
+        AppError(errorType: AppErrorType.api),
+      );
     }
   }
-
 }

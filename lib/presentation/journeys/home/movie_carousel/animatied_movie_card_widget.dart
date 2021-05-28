@@ -29,21 +29,24 @@ class AnimatedMovieCardWidget extends StatelessWidget {
           value = (1 - (value.abs() * 0.1)).clamp(0.0, 1.0);
           return Align(
             alignment: Alignment.topCenter,
-            child: Container(
-              height: Curves.easeIn.transform(value) * ScreenUtil.defaultSize.height * 0.35,
-              width: Sizes.dimen_70.w,
-              child: child,
+            child: LayoutBuilder(
+              builder: (_, constraints) => Container(
+                height: Curves.easeIn.transform(value) * constraints.maxHeight,
+                width: Sizes.dimen_70.w,
+                child: child,
+              ),
             ),
           );
         } else {
           return Align(
             alignment: Alignment.topCenter,
-            child: Container(
-              height: Curves.easeIn.transform(index == 0 ? value : value * 0.9) *
-                  ScreenUtil.defaultSize.height *
-                  0.35,
-              width: Sizes.dimen_70.w,
-              child: child,
+            child: LayoutBuilder(
+              builder: (_, constraints) => Container(
+                height: Curves.easeIn.transform(index == 0 ? value : value * 0.9) *
+                    constraints.maxHeight,
+                width: Sizes.dimen_70.w,
+                child: child,
+              ),
             ),
           );
         }
