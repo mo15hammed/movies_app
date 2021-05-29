@@ -11,6 +11,6 @@ class GetComingSoon extends UseCase<List<MovieEntity>, NoParams> {
   GetComingSoon(this.repository);
 
   Future<Either<AppError, List<MovieEntity>>> call(NoParams noParams) async {
-    return repository.getComingSoon();
+    return await repository.getComingSoon();
   }
 }

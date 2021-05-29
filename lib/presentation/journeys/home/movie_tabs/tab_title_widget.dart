@@ -5,8 +5,6 @@ import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 
-import '../../../app_localization.dart';
-
 class TabTitleWidget extends StatelessWidget {
   final String title;
   final Function onTap;

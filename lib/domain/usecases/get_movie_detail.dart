@@ -1,17 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
+import 'package:movies_app/domain/entities/movie_detail_entity.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/domain/entities/movie_params.dart';
 import 'package:movies_app/domain/entities/no_params.dart';
 import 'package:movies_app/domain/repositories/movie_repository.dart';
 import 'package:movies_app/domain/usecases/usecase.dart';
 
-class GetTrending extends UseCase<List<MovieEntity>, NoParams> {
+class GetMovieDetail extends UseCase<MovieDetailEntity, MovieParams> {
   final MovieRepository repository;
 
-  GetTrending(this.repository);
+  GetMovieDetail(this.repository);
 
   @override
-  Future<Either<AppError, List<MovieEntity>>> call(NoParams noParams) async {
-    return await repository.getTrending();
+  Future<Either<AppError, MovieDetailEntity>> call(MovieParams movieParams) async {
+    return await repository.getMovieDetail(movieParams.id);
   }
 }
