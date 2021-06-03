@@ -5,6 +5,7 @@ import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/data/core/api_constants.dart';
 import 'package:movies_app/presentation/blocs/cast/cast_bloc.dart';
+import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 
 class CastWidget extends StatelessWidget {
@@ -29,6 +30,7 @@ class CastWidget extends StatelessWidget {
                   // height: Sizes.dimen_120.h,
                   width: Sizes.dimen_64.w,
                   child: Card(
+                    color: Colors.white,
                     elevation: 1,
                     margin: EdgeInsets.symmetric(
                       horizontal: Sizes.dimen_2.w,
@@ -67,7 +69,7 @@ class CastWidget extends StatelessWidget {
                             castMember.character,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.caption.copyWith(color: Colors.grey),
                           ),
                         ),
                       ],

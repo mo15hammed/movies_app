@@ -3,6 +3,8 @@ import 'package:movies_app/data/models/cast_crew_result_model.dart';
 import 'package:movies_app/data/models/movie_detail_model.dart';
 import 'package:movies_app/data/models/movie_model.dart';
 import 'package:movies_app/data/models/movies_result_model.dart';
+import 'package:movies_app/data/models/video_model.dart';
+import 'package:movies_app/data/models/video_result_model.dart';
 import 'package:movies_app/domain/entities/movie_detail_entity.dart';
 
 abstract class MovieRemoteDataSource {
@@ -12,6 +14,7 @@ abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getComingSoon();
   Future<MovieDetailModel> getMovieDetail(int id);
   Future<List<CastModel>> getCastCrew(int id);
+  Future<List<VideoModel>> getVideos(int id);
 }
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
@@ -66,5 +69,13 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
     final cast = CastCrewResultModel.fromJson(response).cast;
     // print(cast);
     return cast;
+  }
+
+  @override
+  Future<List<VideoModel>> getVideos(int id) async {
+    final response = await DioHelper.get(url: 'movie/$id/videos');
+    final videos = VideoResultModel.fromJson(response).videos;
+    // print(videos);
+    return videos;
   }
 }
