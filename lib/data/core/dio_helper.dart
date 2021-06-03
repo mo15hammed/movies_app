@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movies_app/common/constants/translation_constants.dart';
 import 'package:movies_app/data/core/api_constants.dart';
 
 class DioHelper {

@@ -14,5 +14,7 @@
   "somethingWrong": "Something Went Wrong...",
   "checkNetwork": "Please check your network connection and press Retry button or put it in as a bug by pressing Feedback button.",
 
-  "noMovies": "Sorry, there are no movies under this section."
+  "noMovies": "Sorry, there are no movies under this section.",
+
+  "cast": "Cast"
 }

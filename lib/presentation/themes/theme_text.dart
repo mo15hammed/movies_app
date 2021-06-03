@@ -64,4 +64,11 @@ extension ThemeTextExtension on TextTheme {
   TextStyle get violetSubtitle1 => subtitle1.copyWith(
     color: AppColor.violet,
   );
+
+  TextStyle get vulcanBodyText2 => bodyText2.copyWith(
+    color: AppColor.vulcan,
+    fontWeight: FontWeight.bold
+  );
+
+
 }
