@@ -15,6 +15,7 @@
   "checkNetwork": "Please check your network connection and press Retry button or put it in as a bug by pressing Feedback button.",
 
   "noMovies": "Sorry, there are no movies under this section.",
+  "noSearchMovies": "No movies found. Please try searching with a different word.",
 
   "cast": "Cast",
   "watchTrailers": "Watch Trailers"

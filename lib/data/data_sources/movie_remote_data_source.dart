@@ -15,6 +15,7 @@ abstract class MovieRemoteDataSource {
   Future<MovieDetailModel> getMovieDetail(int id);
   Future<List<CastModel>> getCastCrew(int id);
   Future<List<VideoModel>> getVideos(int id);
+  Future<List<MovieModel>> getSearchMovies(String query);
 }
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
@@ -29,7 +30,6 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
     // print(movies);
     return movies;
   }
-
 
   @override
   Future<List<MovieModel>> getPopular() async {
@@ -77,5 +77,14 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
     final videos = VideoResultModel.fromJson(response).videos;
     // print(videos);
     return videos;
+  }
+
+  @override
+  Future<List<MovieModel>> getSearchMovies(String query) async {
+    final response = await DioHelper.get(url: 'search/movie', queryParams: {
+      'query': query,
+    });
+    final movies = MoviesResultModel.fromJson(response).movies;
+    return movies;
   }
 }

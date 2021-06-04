@@ -32,7 +32,6 @@ class MovieBackdropWidget extends StatelessWidget {
               widthFactor: 1.0,
               child: BlocBuilder<MovieBackdropBloc, MovieBackdropState>(builder: (context, state) {
                 if (state is MovieBackdropChanged) {
-                  print('${state.movie}');
                   return CachedNetworkImage(
                     imageUrl: '${ApiConstants.BASE_IMAGE_URL + (state.movie.backdropPath ?? state.movie.posterPath)}',
                     fit: BoxFit.fill,

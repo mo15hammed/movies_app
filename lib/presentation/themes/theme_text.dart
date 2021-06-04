@@ -24,13 +24,21 @@ class ThemeText {
         color: Colors.white,
       );
 
+  static TextStyle get _whiteBodyText1 => _poppinsTextTheme.bodyText1.copyWith(
+    fontSize: Sizes.dimen_8.sp,
+    color: Colors.white,
+    wordSpacing: 0.25,
+    letterSpacing: 0.25,
+    height: 1.2,
+  );
+
   static TextStyle get _whiteBodyText2 => _poppinsTextTheme.bodyText2.copyWith(
-        fontSize: Sizes.dimen_5.sp,
-        color: Colors.white,
-        wordSpacing: 0.25,
-        letterSpacing: 0.25,
-        height: 1.5,
-      );
+    fontSize: Sizes.dimen_5.sp,
+    color: Colors.white,
+    wordSpacing: 0.25,
+    letterSpacing: 0.25,
+    height: 1.5,
+  );
 
   static TextStyle get _whiteButton => _poppinsTextTheme.button.copyWith(
         fontSize: Sizes.dimen_5.sp,
@@ -42,6 +50,7 @@ class ThemeText {
         headline5: _whiteHeadline5,
         headline6: _whiteHeadline6,
         subtitle1: _whiteSubtitle1,
+        bodyText1: _whiteBodyText1,
         bodyText2: _whiteBodyText2,
         button: _whiteButton,
       );

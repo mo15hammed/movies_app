@@ -7,8 +7,6 @@ import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/num_extensions.dart';
 import 'package:movies_app/data/core/api_constants.dart';
 import 'package:movies_app/domain/entities/movie_detail_entity.dart';
-import 'package:movies_app/presentation/themes/theme_color.dart';
-
 import 'movie_detail_app_bar.dart';
 
 class BigPoster extends StatelessWidget {
@@ -24,13 +22,18 @@ class BigPoster extends StatelessWidget {
       children: [
         Container(
           foregroundDecoration: BoxDecoration(
-              gradient:
-                  LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-            Colors.transparent,
-            Theme.of(context).primaryColor,
-          ])),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.transparent,
+                Theme.of(context).primaryColor,
+              ],
+            ),
+          ),
           child: CachedNetworkImage(
-            imageUrl: '${ApiConstants.BASE_IMAGE_URL + movie.posterPath}',
+            imageUrl: '${ApiConstants.BASE_IMAGE_URL}${movie.posterPath}',
+            placeholder: (context, str) => Container(height: Sizes.dimen_400),
             // width: ScreenUtil.defaultSize.width,
           ),
         ),
@@ -47,8 +50,7 @@ class BigPoster extends StatelessWidget {
               padding: EdgeInsets.only(bottom: Sizes.dimen_5.h),
               child: Text(
                 movie.releaseDate,
-                style: Theme.of(context).textTheme.greySubtitle2.copyWith(
-                ),
+                style: Theme.of(context).textTheme.greySubtitle2.copyWith(),
               ),
             ),
             trailing: Text(

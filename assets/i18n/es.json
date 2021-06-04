@@ -15,6 +15,7 @@
   "checkNetwork": "Verifique su conexión de red y presione el botón Reintentar o introdúzcalo como un error presionando el botón Comentarios.",
 
   "noMovies": "Lo sentimos, no hay películas en esta sección.",
+  "noSearchMovies": "No se encontraron películas. Intente buscar con una palabra diferente.",
 
   "cast": "Reparto",
   "watchTrailers": "Ver trailers"

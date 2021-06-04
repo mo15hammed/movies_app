@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/screenutils/screenutils.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:movies_app/presentation/blocs/search/search_bloc.dart';
+import 'package:movies_app/presentation/journeys/search/custom_search_delegae.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
 
 class MovieAppBar extends StatelessWidget {
@@ -39,7 +42,11 @@ class MovieAppBar extends StatelessWidget {
                 color: Colors.white,
                 size: Sizes.dimen_12.h,
               ),
-              onPressed: () {},
+              onPressed: () {
+                showSearch(context: context, delegate: CustomSearchDelegate(
+                  BlocProvider.of<SearchBloc>(context),
+                ));
+              },
             ),
           ],
         ),

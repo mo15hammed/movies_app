@@ -10,12 +10,14 @@ import 'package:movies_app/domain/usecases/get_popular.dart';
 import 'package:movies_app/domain/usecases/get_trending.dart';
 import 'package:movies_app/domain/usecases/get_videos.dart';
 import 'package:movies_app/domain/usecases/get_videos.dart';
+import 'package:movies_app/domain/usecases/search_movies.dart';
 import 'package:movies_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
+import 'package:movies_app/presentation/blocs/search/search_bloc.dart';
 import 'package:movies_app/presentation/blocs/videos/videos_bloc.dart';
 
 final getItInstance = GetIt.I;
@@ -32,6 +34,7 @@ Future init() async {
   getItInstance.registerLazySingleton<GetMovieDetail>(() => GetMovieDetail(getItInstance()));
   getItInstance.registerLazySingleton<GetCast>(() => GetCast(getItInstance()));
   getItInstance.registerLazySingleton<GetVideos>(() => GetVideos(getItInstance()));
+  getItInstance.registerLazySingleton<SearchMovies>(() => SearchMovies(getItInstance()));
 
   getItInstance.registerFactory<MovieCarouselBloc>(
     () => MovieCarouselBloc(
@@ -68,5 +71,10 @@ Future init() async {
     VideosBloc(getVideos: getItInstance()),
   );
 
+  getItInstance.registerFactory(
+        () => SearchBloc(
+      searchMovies: getItInstance(),
+    ),
+  );
   getItInstance.registerSingleton<LanguageBloc>(LanguageBloc());
 }

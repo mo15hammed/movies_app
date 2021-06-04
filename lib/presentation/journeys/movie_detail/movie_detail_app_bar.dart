@@ -15,15 +15,15 @@ class MovieDetailAppBar extends StatelessWidget {
             Navigator.of(context).pop();
           },
           child: Icon(
-            Icons.arrow_back_ios,
+            Icons.arrow_back,
             color: Colors.white,
-            size: Sizes.dimen_12.w,
+            size: Sizes.dimen_12.h,
           ),
         ),
         Icon(
           Icons.favorite_border,
           color: Colors.white,
-          size: Sizes.dimen_12.w,
+          size: Sizes.dimen_12.h,
         ),
       ],
     );

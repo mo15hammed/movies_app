@@ -9,6 +9,7 @@ import 'package:movies_app/data/models/video_model.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/domain/entities/cast_entity.dart';
 import 'package:movies_app/domain/entities/movie_detail_entity.dart';
+import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/domain/repositories/movie_repository.dart';
 
 class MovieRepositoryImpl extends MovieRepository {
@@ -85,7 +86,7 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movie = await remoteDataSource.getMovieDetail(id);
       return Right(movie);
-    } on DioError catch(e) {
+    } on DioError catch (e) {
       if (e.type == DioErrorType.other)
         return Left(
           AppError(errorType: AppErrorType.network),
@@ -101,7 +102,7 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final castCrew = await remoteDataSource.getCastCrew(id);
       return Right(castCrew);
-    } on DioError catch(e) {
+    } on DioError catch (e) {
       if (e.type == DioErrorType.other)
         return Left(
           AppError(errorType: AppErrorType.network),
@@ -117,7 +118,23 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final videos = await remoteDataSource.getVideos(id);
       return Right(videos);
-    } on DioError catch(e) {
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.other)
+        return Left(
+          AppError(errorType: AppErrorType.network),
+        );
+      return Left(
+        AppError(errorType: AppErrorType.api),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, List<MovieEntity>>> getSearchMovies(String query) async {
+    try {
+      final movies = await remoteDataSource.getSearchMovies(query);
+      return Right(movies);
+    } on DioError catch (e) {
       if (e.type == DioErrorType.other)
         return Left(
           AppError(errorType: AppErrorType.network),

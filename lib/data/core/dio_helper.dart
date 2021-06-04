@@ -18,9 +18,10 @@ class DioHelper {
 
   static Future<dynamic> get({
     @required String url,
-    Map<String, dynamic> query,
+    Map<String, dynamic> queryParams,
   }) async {
-    final response = await _dio.get(url, queryParameters: query);
+    queryParams?.addAll(_dio.options.queryParameters);
+    final response = await _dio.get(url, queryParameters: queryParams);
 
     if (response.statusCode == 200) {
       return response.data;

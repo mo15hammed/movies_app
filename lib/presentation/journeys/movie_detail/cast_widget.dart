@@ -16,7 +16,6 @@ class CastWidget extends StatelessWidget {
     return BlocBuilder<CastBloc, CastState>(
       builder: (context, state) {
         if (state is CastLoadSuccess) {
-          print(state.cast.length);
           return Container(
             height: Sizes.dimen_120.h,
             child: ListView.builder(
@@ -25,7 +24,6 @@ class CastWidget extends StatelessWidget {
               itemCount: state.cast.length,
               itemBuilder: (context, index) {
                 final castMember = state.cast[index];
-                print(castMember.posterPath);
                 return Container(
                   // height: Sizes.dimen_120.h,
                   width: Sizes.dimen_64.w,
