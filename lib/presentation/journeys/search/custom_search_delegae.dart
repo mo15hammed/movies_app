@@ -4,7 +4,6 @@ import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
-import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/presentation/blocs/search/search_bloc.dart';
 import 'package:movies_app/presentation/journeys/search/search_movie_card.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';

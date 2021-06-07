@@ -5,7 +5,6 @@ import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/data/core/api_constants.dart';
 import 'package:movies_app/presentation/blocs/cast/cast_bloc.dart';
-import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 
 class CastWidget extends StatelessWidget {

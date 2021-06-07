@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:movies_app/domain/entities/movie_detail_entity.dart';
 
 class MovieEntity extends Equatable {
   final String posterPath;
@@ -25,4 +26,16 @@ class MovieEntity extends Equatable {
 
   @override
   bool get stringify => true;
+
+  factory MovieEntity.fromMovieDetailEntity(MovieDetailEntity movie) {
+    return MovieEntity(
+      posterPath: movie.posterPath,
+      id: movie.id,
+      backdropPath: movie.backdropPath,
+      title: movie.title,
+      voteAverage: movie.voteAverage,
+      releaseDate: movie.releaseDate,
+      overview: movie.overview,
+    );
+  }
 }

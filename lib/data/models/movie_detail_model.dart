@@ -68,7 +68,7 @@ class MovieDetailModel extends MovieDetailEntity {
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
       belongsToCollection: json['belongs_to_collection'] != null
-          ? new BelongsToCollection.fromJson(json['belongs_to_collection'])
+          ? BelongsToCollection.fromJson(json['belongs_to_collection'])
           : null,
       budget: json['budget'],
       genres: _genres(json),
@@ -93,7 +93,7 @@ class MovieDetailModel extends MovieDetailEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['adult'] = this.adult;
     data['backdrop_path'] = this.backdropPath;
     data['belongs_to_collection'] = this.belongsToCollection;
@@ -134,9 +134,9 @@ class MovieDetailModel extends MovieDetailEntity {
 
 _genres(Map<String, dynamic> json) {
   if (json['genres'] != null) {
-    final genres = new List<Genres>();
+    final genres = <Genres>[];
     json['genres'].forEach((v) {
-      genres.add(new Genres.fromJson(v));
+      genres.add(Genres.fromJson(v));
     });
   }
 }
@@ -157,7 +157,7 @@ class BelongsToCollection {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
     data['poster_path'] = this.posterPath;
@@ -178,7 +178,7 @@ class Genres {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
     return data;
@@ -201,7 +201,7 @@ class ProductionCompanies {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['logo_path'] = this.logoPath;
     data['name'] = this.name;
@@ -222,7 +222,7 @@ class ProductionCountries {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['iso_3166_1'] = this.iso31661;
     data['name'] = this.name;
     return data;
@@ -243,7 +243,7 @@ class SpokenLanguages {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['english_name'] = this.englishName;
     data['iso_639_1'] = this.iso6391;
     data['name'] = this.name;

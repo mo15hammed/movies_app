@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/blocs/cast/cast_bloc.dart';
+import 'package:movies_app/presentation/blocs/favorite/favorite_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:movies_app/presentation/blocs/videos/videos_bloc.dart';
 import 'package:movies_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
@@ -11,7 +12,6 @@ import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/journeys/movie_detail/videos_widget.dart';
-import 'package:movies_app/presentation/widgets/button.dart';
 
 import 'big_poster.dart';
 import 'cast_widget.dart';
@@ -37,6 +37,9 @@ class MovieDetailScreen extends StatelessWidget {
           ),
           BlocProvider<VideosBloc>.value(
             value: getItInstance<VideosBloc>(),
+          ),
+          BlocProvider<FavoriteBloc>.value(
+            value: getItInstance<FavoriteBloc>(),
           ),
         ],
         child: BlocBuilder<MovieDetailBloc, MovieDetailState>(

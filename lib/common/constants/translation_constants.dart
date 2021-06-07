@@ -15,6 +15,7 @@ class TranslationConsts {
   static const String checkNetwork = 'checkNetwork';
   static const String noMovies = 'noMovies';
   static const String noSearchMovies = 'noSearchMovies';
+  static const String noFavMovies = 'noFavMovies';
   static const String cast = 'cast';
   static const String watchTrailers = 'watchTrailers';
 }

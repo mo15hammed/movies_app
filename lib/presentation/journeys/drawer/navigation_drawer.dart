@@ -5,11 +5,10 @@ import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
-import 'package:movies_app/presentation/app_localization.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_expanded_list_item.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_list_item.dart';
-import 'package:movies_app/presentation/themes/theme_color.dart';
+import 'package:movies_app/presentation/journeys/favorite/favorite_screen.dart';
 import 'package:movies_app/presentation/widgets/app_dialog.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
 import 'package:wiredash/wiredash.dart';
@@ -63,7 +62,11 @@ class NavigationDrawer extends StatelessWidget {
                   children: [
                     NavigationListItem(
                       title: TranslationConsts.favMovies.t(context),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => FavoriteScreen()),
+                        );
+                      },
                     ),
                     NavigationExpandedListItem(
                       title: TranslationConsts.language.t(context),

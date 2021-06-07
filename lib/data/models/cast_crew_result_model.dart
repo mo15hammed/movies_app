@@ -20,15 +20,15 @@ class CastCrewResultModel {
       });
     }
     if (json['crew'] != null) {
-      crew = new List<Crew>();
+      crew = <Crew>[];
       json['crew'].forEach((v) {
-        crew.add(new Crew.fromJson(v));
+        crew.add(Crew.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     if (this.cast != null) {
       data['cast'] = this.cast.map((v) => v.toJson()).toList();
@@ -92,7 +92,7 @@ class CastModel extends CastEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['adult'] = this.adult;
     data['gender'] = this.gender;
     data['id'] = this.id;
@@ -150,7 +150,7 @@ class Crew {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['adult'] = this.adult;
     data['gender'] = this.gender;
     data['id'] = this.id;

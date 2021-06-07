@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
-import 'package:movies_app/common/screenutils/screenutils.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_card_widget.dart';
 
 class AnimatedMovieCardWidget extends StatelessWidget {

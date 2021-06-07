@@ -5,7 +5,6 @@ import 'package:movies_app/data/models/movie_model.dart';
 import 'package:movies_app/data/models/movies_result_model.dart';
 import 'package:movies_app/data/models/video_model.dart';
 import 'package:movies_app/data/models/video_result_model.dart';
-import 'package:movies_app/domain/entities/movie_detail_entity.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getTrending();

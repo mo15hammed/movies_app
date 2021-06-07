@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/common/constants/languages.dart';
 import 'package:movies_app/common/screenutils/screenutils.dart';
+import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/app_localization.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
@@ -19,7 +20,7 @@ class MovieApp extends StatelessWidget {
     ScreenUtil.init();
 
     return BlocProvider<LanguageBloc>(
-      create: (context) => LanguageBloc(),
+      create: (context) => getItInstance<LanguageBloc>()..add(LoadPreferredLanguageEvent()),
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           if (state is LanguageLoaded) {

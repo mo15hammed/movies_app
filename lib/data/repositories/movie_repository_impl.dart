@@ -1,21 +1,21 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:movies_app/data/data_sources/movie_local_data_source.dart';
 import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
 import 'package:movies_app/data/models/cast_crew_result_model.dart';
 import 'package:movies_app/data/models/movie_model.dart';
 import 'package:movies_app/data/models/video_model.dart';
+import 'package:movies_app/data/tables/movie_table.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
-import 'package:movies_app/domain/entities/cast_entity.dart';
 import 'package:movies_app/domain/entities/movie_detail_entity.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/domain/repositories/movie_repository.dart';
 
 class MovieRepositoryImpl extends MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
+  final MovieLocalDataSource localDataSource;
 
-  MovieRepositoryImpl(this.remoteDataSource);
+  MovieRepositoryImpl(this.remoteDataSource, this.localDataSource);
 
   @override
   Future<Either<AppError, List<MovieModel>>> getTrending() async {
@@ -141,6 +141,55 @@ class MovieRepositoryImpl extends MovieRepository {
         );
       return Left(
         AppError(errorType: AppErrorType.api),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> deleteFavMovies(int movieId) async {
+    try {
+      final response = await localDataSource.deleteMovie(movieId);
+      return Right(response);
+    } catch (e) {
+      return Left(
+        AppError(message: e.toString(), errorType: AppErrorType.database),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, List<MovieEntity>>> getFavMovies() async {
+    try {
+      final response = await localDataSource.getMovies();
+      return Right(response);
+    } catch (e) {
+      return Left(
+        AppError(message: e.toString(), errorType: AppErrorType.database),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, bool>> isFavMovie(int movieId) async {
+    try {
+      final response = await localDataSource.isMovieFavorite(movieId);
+      return Right(response);
+    } catch (e) {
+      return Left(
+        AppError(message: e.toString(), errorType: AppErrorType.database),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> saveFavMovies(MovieEntity movieEntity) async {
+    try {
+      final response = await localDataSource.saveMovie(MovieTable.fromMovieEntity(movieEntity));
+      return Right(response);
+    } catch (e) {
+      print(e.toString());
+      return Left(
+        AppError(message: e.toString(), errorType: AppErrorType.database),
       );
     }
   }
