@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/languages.dart';
-import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/domain/entities/language_entity.dart';
 import 'package:movies_app/domain/entities/no_params.dart';
 import 'package:movies_app/domain/usecases/get_preferred_language.dart';

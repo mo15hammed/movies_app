@@ -43,9 +43,12 @@ class MovieAppBar extends StatelessWidget {
                 size: Sizes.dimen_12.h,
               ),
               onPressed: () {
-                showSearch(context: context, delegate: CustomSearchDelegate(
-                  BlocProvider.of<SearchBloc>(context),
-                ));
+                showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(
+                    BlocProvider.of<SearchBloc>(context),
+                  ),
+                );
               },
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/languages.dart';
+import 'package:movies_app/common/constants/route_constants.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
 import 'package:movies_app/common/extensions/size_extensions.dart';
@@ -8,7 +9,6 @@ import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_expanded_list_item.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_list_item.dart';
-import 'package:movies_app/presentation/journeys/favorite/favorite_screen.dart';
 import 'package:movies_app/presentation/widgets/app_dialog.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
 import 'package:wiredash/wiredash.dart';
@@ -63,9 +63,7 @@ class NavigationDrawer extends StatelessWidget {
                     NavigationListItem(
                       title: TranslationConsts.favMovies.t(context),
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => FavoriteScreen()),
-                        );
+                        Navigator.of(context).pushNamed(RouteList.favorite);
                       },
                     ),
                     NavigationExpandedListItem(

@@ -6,11 +6,12 @@ import 'package:movies_app/common/screenutils/screenutils.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/app_localization.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
+import 'package:movies_app/presentation/routes.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:movies_app/presentation/wiredash_app.dart';
 
-import 'journeys/home/home_screen.dart';
+import 'custom_page_route_builders/slide_vertical_page_route_builder.dart';
 
 class MovieApp extends StatelessWidget {
   final _navigationKey = GlobalKey<NavigatorState>();
@@ -48,7 +49,17 @@ class MovieApp extends StatelessWidget {
                   GlobalWidgetsLocalizations.delegate,
                   AppLocalization.delegate,
                 ],
-                home: HomeScreen(),
+                // home: HomeScreen(),
+                builder: (context, child) {
+                  return child;
+                },
+                // initialRoute: RouteList.home,
+                onGenerateRoute: (RouteSettings settings) {
+                  final routes = Routes.getRoutes(settings);
+                  final WidgetBuilder builder = routes[settings.name];
+
+                  return SlideVerticalPageRouteBuilder(builder: builder, settings: settings);
+                },
               ),
             );
           }
