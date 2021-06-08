@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/data/core/api_constants.dart';
 import 'package:movies_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
@@ -16,25 +16,23 @@ class CastWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is CastLoadSuccess) {
           return Container(
-            height: Sizes.dimen_120.h,
+            height: Sizes.dimen_240.h,
             child: ListView.builder(
+              padding: EdgeInsets.symmetric(
+                horizontal: Sizes.dimen_16.w,
+              ),
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: state.cast.length,
               itemBuilder: (context, index) {
                 final castMember = state.cast[index];
                 return Container(
-                  // height: Sizes.dimen_120.h,
-                  width: Sizes.dimen_64.w,
+                  width: Sizes.dimen_160.w,
                   child: Card(
                     color: Colors.white,
                     elevation: 1,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: Sizes.dimen_2.w,
-                      vertical: Sizes.dimen_4.h,
-                    ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(Sizes.dimen_4.w),
+                      borderRadius: BorderRadius.circular(Sizes.dimen_14.w),
                     ),
                     clipBehavior: Clip.antiAlias,
                     child: Column(
@@ -44,11 +42,12 @@ class CastWidget extends StatelessWidget {
                         Expanded(
                           child: CachedNetworkImage(
                             imageUrl: '${ApiConstants.BASE_IMAGE_URL + castMember.posterPath ?? ''}',
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.fitWidth,
+                            width: double.infinity,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_3.w),
+                          padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_8.w),
                           child: Text(
                             castMember.name,
                             overflow: TextOverflow.fade,
@@ -58,9 +57,9 @@ class CastWidget extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.only(
-                            start: Sizes.dimen_3.w,
-                            end : Sizes.dimen_3.w,
-                            bottom: Sizes.dimen_2.h,
+                            start: Sizes.dimen_8.w,
+                            end : Sizes.dimen_8.w,
+                            bottom: Sizes.dimen_6.h,
                           ),
                           child: Text(
                             castMember.character,

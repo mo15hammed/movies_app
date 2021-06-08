@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_card_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatedMovieCardWidget extends StatelessWidget {
   final int index;
@@ -30,8 +30,9 @@ class AnimatedMovieCardWidget extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: LayoutBuilder(
               builder: (_, constraints) => Container(
+                margin: EdgeInsets.symmetric(horizontal: Sizes.dimen_24.w),
                 height: Curves.easeIn.transform(value) * constraints.maxHeight,
-                width: Sizes.dimen_70.w,
+                width: constraints.maxWidth,
                 child: child,
               ),
             ),
@@ -43,7 +44,7 @@ class AnimatedMovieCardWidget extends StatelessWidget {
               builder: (_, constraints) => Container(
                 height: Curves.easeIn.transform(index == 0 ? value : value * 0.9) *
                     constraints.maxHeight,
-                width: Sizes.dimen_70.w,
+                width: constraints.maxWidth,
                 child: child,
               ),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/presentation/widgets/button.dart';
@@ -22,15 +22,13 @@ class AppErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_10.w),
+      padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_20.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            errorType == AppErrorType.network
-                ? TranslationConsts.checkNetwork.t(context)
-                : TranslationConsts.somethingWrong.t(context),
+            message,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.subtitle1,
           ),

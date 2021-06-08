@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/domain/entities/movie_detail_entity.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/blocs/favorite/favorite_bloc.dart';
@@ -25,7 +25,7 @@ class MovieDetailAppBar extends StatelessWidget {
           child: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: Sizes.dimen_12.h,
+            size: Sizes.dimen_32.h,
           ),
         ),
         BlocBuilder<FavoriteBloc, FavoriteState>(
@@ -41,7 +41,7 @@ class MovieDetailAppBar extends StatelessWidget {
                 child: Icon(
                   state.isFav ? Icons.favorite : Icons.favorite_border,
                   color: Colors.white,
-                  size: Sizes.dimen_12.h,
+                  size: Sizes.dimen_32.h,
                 ),
               );
             }
@@ -49,7 +49,7 @@ class MovieDetailAppBar extends StatelessWidget {
             return Icon(
               Icons.favorite_border,
               color: Colors.white,
-              size: Sizes.dimen_12.h,
+              size: Sizes.dimen_32.h,
             );
           },
         ),

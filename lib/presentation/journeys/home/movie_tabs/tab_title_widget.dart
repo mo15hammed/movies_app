@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';

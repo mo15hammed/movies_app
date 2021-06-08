@@ -24,17 +24,19 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     SearchEvent event,
   ) async* {
     if (event is LoadSearchMoviesEvent) {
-      yield SearchLoading();
-      Either<AppError, List<MovieEntity>> eitherSearch =
-          await searchMovies(MovieSearchParams(query: event.query));
+      if (event.query.length >= 1) {
+        yield SearchLoading();
+        Either<AppError, List<MovieEntity>> eitherSearch =
+        await searchMovies(MovieSearchParams(query: event.query));
 
-      yield eitherSearch.fold(
-        (l) => SearchError(
-          message: l.message,
-          errorType: l.errorType,
-        ),
-        (movies) => SearchSuccess(movies),
-      );
+        yield eitherSearch.fold(
+              (l) => SearchError(
+            message: l.message,
+            errorType: l.errorType,
+          ),
+              (movies) => SearchSuccess(movies),
+        );
+      }
     }
   }
 }

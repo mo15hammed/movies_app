@@ -8,13 +8,11 @@ import 'package:movies_app/presentation/blocs/movie_detail/movie_detail_bloc.dar
 import 'package:movies_app/presentation/blocs/videos/videos_bloc.dart';
 import 'package:movies_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/journeys/movie_detail/videos_widget.dart';
-
 import 'big_poster.dart';
 import 'cast_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final MovieDetailArgument args;
@@ -56,8 +54,8 @@ class MovieDetailScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.only(
-                        start: Sizes.dimen_6.w,
-                        end: Sizes.dimen_6.w,
+                        start: Sizes.dimen_16.w,
+                        end: Sizes.dimen_16.w,
                         top: Sizes.dimen_6.h,
                         bottom: Sizes.dimen_12.h,
                       ),
@@ -67,7 +65,7 @@ class MovieDetailScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_6.w),
+                      padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
                       child: Text(
                         TranslationConsts.cast.t(context),
                         style: Theme.of(context).textTheme.headline6,

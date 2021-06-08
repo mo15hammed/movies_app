@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/screenutils/screenutils.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/presentation/blocs/search/search_bloc.dart';
 import 'package:movies_app/presentation/journeys/search/custom_search_delegae.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovieAppBar extends StatelessWidget {
   const MovieAppBar({Key key}) : super(key: key);
@@ -15,7 +14,8 @@ class MovieAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: ScreenUtil().statusBarHeight + Sizes.dimen_4.h,
+        top: ScreenUtil().statusBarHeight + Sizes.dimen_8.h,
+        bottom: Sizes.dimen_8.h,
         left: Sizes.dimen_4.w,
         right: Sizes.dimen_4.w,
       ),
@@ -25,7 +25,7 @@ class MovieAppBar extends StatelessWidget {
             IconButton(
               icon: SvgPicture.asset(
                 'assets/svgs/menu.svg',
-                height: Sizes.dimen_12.h,
+                height: Sizes.dimen_32,
               ),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
@@ -33,14 +33,14 @@ class MovieAppBar extends StatelessWidget {
             ),
             Expanded(
               child: Logo(
-                height: Sizes.dimen_6.h,
+                height: Sizes.dimen_48,
               ),
             ),
             IconButton(
               icon: Icon(
                 Icons.search,
                 color: Colors.white,
-                size: Sizes.dimen_12.h,
+                size: Sizes.dimen_32,
               ),
               onPressed: () {
                 showSearch(

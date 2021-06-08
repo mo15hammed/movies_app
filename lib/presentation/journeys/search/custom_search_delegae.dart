@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/blocs/search/search_bloc.dart';
 import 'package:movies_app/presentation/journeys/search/search_movie_card.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart ';
 import 'package:movies_app/presentation/widgets/app_error_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   final SearchBloc searchBloc;
@@ -22,7 +22,7 @@ class CustomSearchDelegate extends SearchDelegate {
         icon: Icon(
           Icons.clear,
           color: query.isEmpty ? Colors.grey : AppColor.royalBlue,
-          size: Sizes.dimen_12.h,
+          size: Sizes.dimen_32.h,
         ),
         onPressed: query.isEmpty
             ? null
@@ -42,7 +42,7 @@ class CustomSearchDelegate extends SearchDelegate {
       child: Icon(
         Icons.arrow_back,
         color: Colors.white,
-        size: Sizes.dimen_12.h,
+        size: Sizes.dimen_32.h,
       ),
     );
   }
@@ -55,7 +55,9 @@ class CustomSearchDelegate extends SearchDelegate {
       bloc: searchBloc,
       builder: (context, state) {
         if (state is SearchError) {
+          print(state.message);
           return AppErrorWidget(
+            message: state.message,
             errorType: state.errorType,
             onRetryPressed: () => searchBloc?.add(LoadSearchMoviesEvent(query)),
           );
@@ -64,7 +66,7 @@ class CustomSearchDelegate extends SearchDelegate {
           if (movies.isEmpty) {
             return Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_6.w),
+                padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_20.w),
                 child: Text(
                   TranslationConsts.noSearchMovies.t(context),
                   textAlign: TextAlign.center,
@@ -74,12 +76,12 @@ class CustomSearchDelegate extends SearchDelegate {
           }
           return ListView.separated(
             physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(vertical: Sizes.dimen_6.h),
+            padding: EdgeInsets.symmetric(vertical: Sizes.dimen_16.h),
             itemCount: state.movies.length,
             separatorBuilder: (context, index) => Container(
               margin: EdgeInsets.symmetric(
-                horizontal: Sizes.dimen_6.w,
-                vertical: Sizes.dimen_4.h,
+                horizontal: Sizes.dimen_24.w,
+                vertical: Sizes.dimen_14.h,
               ),
               height: 1,
               color: Colors.grey[800],
@@ -104,6 +106,7 @@ class CustomSearchDelegate extends SearchDelegate {
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: Theme.of(context).textTheme.greySubtitle1,
       ),
+
     );
   }
 }

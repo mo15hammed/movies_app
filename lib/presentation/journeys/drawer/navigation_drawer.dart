@@ -4,7 +4,6 @@ import 'package:movies_app/common/constants/languages.dart';
 import 'package:movies_app/common/constants/route_constants.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_expanded_list_item.dart';
@@ -12,6 +11,7 @@ import 'package:movies_app/presentation/journeys/drawer/navigation_list_item.dar
 import 'package:movies_app/presentation/widgets/app_dialog.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
 import 'package:wiredash/wiredash.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);
@@ -27,25 +27,27 @@ class NavigationDrawer extends StatelessWidget {
           )
         ],
       ),
-      width: MediaQuery.of(context).size.width * 0.8,
+      width: 0.8.sw,
+      height: 1.sh,
       constraints: BoxConstraints(
         maxWidth: Sizes.dimen_400,
       ),
       child: SafeArea(
-        child: Container(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Center(
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(
-                    top: Sizes.dimen_14.h,
+                    top: Sizes.dimen_36.h,
                     bottom: Sizes.dimen_14.h,
-                    start: Sizes.dimen_8.w,
-                    end: Sizes.dimen_8.w,
+                    start: Sizes.dimen_14.w,
+                    end: Sizes.dimen_14.w,
                   ),
                   child: Logo(
-                    height: Sizes.dimen_10.h,
+                    height: Sizes.dimen_80,
                   ),
                 ),
               ),
@@ -108,7 +110,7 @@ class NavigationDrawer extends StatelessWidget {
           buttonText: TranslationConsts.okay.t(context),
           image: Image.asset(
             'assets/pngs/tmdb_logo.png',
-            height: Sizes.dimen_32.h,
+            height: Sizes.dimen_80.h,
           ),
         );
       },

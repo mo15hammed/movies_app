@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NavigationListItem extends StatelessWidget {
   const NavigationListItem({
@@ -39,7 +39,7 @@ class NavigationSubListItem extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: ListTile(
-        contentPadding: EdgeInsetsDirectional.only(start: Sizes.dimen_12.w),
+        contentPadding: EdgeInsetsDirectional.only(start: Sizes.dimen_40.w),
         title: Text(
           title,
           style: Theme.of(context).textTheme.subtitle1,

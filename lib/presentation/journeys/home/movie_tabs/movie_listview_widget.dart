@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_tab_card_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovieListviewWidget extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -15,7 +15,7 @@ class MovieListviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: Sizes.dimen_6.h),
+      padding: EdgeInsets.symmetric(vertical: Sizes.dimen_16.h),
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -29,7 +29,7 @@ class MovieListviewWidget extends StatelessWidget {
             posterPath: movie.posterPath,
           );
         },
-        separatorBuilder: (context, index) => SizedBox(width: Sizes.dimen_4.w),
+        separatorBuilder: (context, index) => SizedBox(width: Sizes.dimen_16.w),
         itemCount: movies.length,
       ),
     );

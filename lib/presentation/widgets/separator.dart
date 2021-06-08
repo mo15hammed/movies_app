@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 
 class Separator extends StatelessWidget {
@@ -9,14 +9,12 @@ class Separator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Sizes.dimen_48.w,
-      height: Sizes.dimen_1.h,
-      padding: EdgeInsets.only(
-        top: Sizes.dimen_2.h,
-        bottom: Sizes.dimen_6.h,
-      ),
+      width: Sizes.dimen_120.w,
+      height: Sizes.dimen_4.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(Sizes.dimen_1.h)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(Sizes.dimen_1.w),
+        ),
         gradient: LinearGradient(
           colors: [
             AppColor.violet,

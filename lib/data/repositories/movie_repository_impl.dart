@@ -137,10 +137,10 @@ class MovieRepositoryImpl extends MovieRepository {
     } on DioError catch (e) {
       if (e.type == DioErrorType.other)
         return Left(
-          AppError(errorType: AppErrorType.network),
+          AppError(errorType: AppErrorType.network, message: e.toString()),
         );
       return Left(
-        AppError(errorType: AppErrorType.api),
+        AppError(errorType: AppErrorType.api, message: e.toString()),
       );
     }
   }

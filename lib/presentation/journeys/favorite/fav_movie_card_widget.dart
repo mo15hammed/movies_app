@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/route_constants.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/data/core/api_constants.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/blocs/favorite/favorite_bloc.dart';
 import 'package:movies_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavMovieCardWidget extends StatelessWidget {
   final MovieEntity movie;
@@ -31,7 +31,7 @@ class FavMovieCardWidget extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Sizes.dimen_6.w),
+          borderRadius: BorderRadius.circular(Sizes.dimen_16.w),
         ),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Stack(
@@ -52,7 +52,7 @@ class FavMovieCardWidget extends StatelessWidget {
                 icon: Icon(
                   Icons.delete,
                   color: Colors.white,
-                  size: Sizes.dimen_10.w,
+                  size: Sizes.dimen_32.w,
                 ),
               ),
             )

@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/route_constants.dart';
 import 'package:movies_app/common/constants/size_constraints.dart';
-import 'package:movies_app/common/extensions/size_extensions.dart';
 import 'package:movies_app/data/core/api_constants.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart ';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchMovieCard extends StatelessWidget {
   final MovieEntity movie;
@@ -26,29 +26,28 @@ class SearchMovieCard extends StatelessWidget {
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: Sizes.dimen_6.w,
-          // vertical: Sizes.dimen_2.h,
+          horizontal: Sizes.dimen_16.w,
         ),
         child: Container(
-          height: Sizes.dimen_48.h,
+          height: Sizes.dimen_140.h,
           child: Row(
             children: [
               Expanded(
                 flex: 1,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(Sizes.dimen_4.w),
+                  borderRadius: BorderRadius.circular(Sizes.dimen_14.w),
                   child: CachedNetworkImage(
                     imageUrl: '${ApiConstants.BASE_IMAGE_URL}${movie.posterPath}',
                     placeholder: (context, str) => Image.asset(
                       'assets/pngs/tmdb_logo.png',
                       fit: BoxFit.cover,
                     ),
-                    height: Sizes.dimen_48.h,
+                    height: double.infinity,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(width: Sizes.dimen_4.w),
+              SizedBox(width: Sizes.dimen_10.w),
               Expanded(
                 flex: 3,
                 child: Column(
@@ -56,8 +55,6 @@ class SearchMovieCard extends StatelessWidget {
                   children: [
                     Text(
                       movie.title,
-                      // overflow: TextOverflow.fade,
-                      // maxLines: 1,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Expanded(
