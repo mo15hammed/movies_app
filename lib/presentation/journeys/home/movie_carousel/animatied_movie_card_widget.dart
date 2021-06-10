@@ -42,6 +42,7 @@ class AnimatedMovieCardWidget extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: LayoutBuilder(
               builder: (_, constraints) => Container(
+                margin: EdgeInsets.symmetric(horizontal: Sizes.dimen_24.w),
                 height: Curves.easeIn.transform(index == 0 ? value : value * 0.9) *
                     constraints.maxHeight,
                 width: constraints.maxWidth,

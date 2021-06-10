@@ -44,6 +44,7 @@ class FavMovieCardWidget extends StatelessWidget {
             Align(
               alignment: AlignmentDirectional.topEnd,
               child: IconButton(
+                iconSize: Sizes.dimen_32.h,
                 onPressed: () {
                   BlocProvider.of<FavoriteBloc>(context).add(DeleteFavMovieEvent(movie.id));
                 },
@@ -52,7 +53,7 @@ class FavMovieCardWidget extends StatelessWidget {
                 icon: Icon(
                   Icons.delete,
                   color: Colors.white,
-                  size: Sizes.dimen_32.w,
+                  // size: Sizes.dimen_32.w,
                 ),
               ),
             )

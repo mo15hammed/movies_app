@@ -28,7 +28,13 @@ class AppErrorWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            message,
+            message != null
+                ? message
+                : errorType == AppErrorType.database
+                    ? TranslationConsts.noFavMovies.t(context)
+                    : errorType == AppErrorType.api
+                        ? TranslationConsts.somethingWrong.t(context)
+                        : TranslationConsts.checkNetwork.t(context),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.subtitle1,
           ),

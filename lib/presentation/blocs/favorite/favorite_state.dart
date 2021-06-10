@@ -18,7 +18,14 @@ class FavMoviesLoaded extends FavoriteState {
   List<Object> get props => [movies];
 }
 
-class FavMoviesError extends FavoriteState {}
+class FavMoviesError extends FavoriteState {
+  final String message;
+
+  const FavMoviesError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
 
 class IsFavoriteMovie extends FavoriteState {
   final bool isFav;

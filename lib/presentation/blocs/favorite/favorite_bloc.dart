@@ -39,7 +39,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       }
       final response = await isFavMovie(MovieParams(event.movieEntity.id));
       yield response.fold(
-        (l) => FavMoviesError(),
+        (l) => FavMoviesError(l.message),
         (r) => IsFavoriteMovie(r),
       );
     } else if (event is LoadFavMoviesEvent) {
@@ -51,7 +51,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       final response = await isFavMovie(MovieParams(event.movieId));
       yield response.fold(
         (l) {
-          return FavMoviesError();
+          return FavMoviesError(l.message);
         },
         (r) {
           return IsFavoriteMovie(r);
@@ -63,7 +63,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   Stream<FavoriteState> _fetchFavoriteMovies() async* {
     final response = await getFavMovies(NoParams());
     yield response.fold(
-      (l) => FavMoviesError(),
+      (l) => FavMoviesError(l.message),
       (movies) => FavMoviesLoaded(movies),
     );
   }
