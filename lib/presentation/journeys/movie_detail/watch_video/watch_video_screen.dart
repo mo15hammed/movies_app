@@ -32,7 +32,10 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
+        hideThumbnail: true,
+        
       ),
+
     );
   }
 
@@ -45,7 +48,7 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _controller.value.isFullScreen ? null : AppBar(
         title: Text(
           TranslationConsts.watchTrailers.t(context),
         ),

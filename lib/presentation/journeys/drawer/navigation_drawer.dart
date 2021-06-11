@@ -6,6 +6,7 @@ import 'package:movies_app/common/constants/size_constraints.dart';
 import 'package:movies_app/common/constants/translation_constants.dart';
 import 'package:movies_app/common/extensions/string_extensions.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
+import 'package:movies_app/presentation/blocs/login/login_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_expanded_list_item.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:movies_app/presentation/widgets/app_dialog.dart';
@@ -89,6 +90,24 @@ class NavigationDrawer extends StatelessWidget {
                         Navigator.of(context).pop();
                         _showDialog(context);
                       },
+                    ),
+                    BlocListener<LoginBloc, LoginState>(
+                      listenWhen: (previous, current) => current is LogoutSuccess,
+                      listener: (context, state) {
+                        if (state is LogoutSuccess) {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            RouteList.initial,
+                            (route) => false,
+                          );
+                        }
+                      },
+                      child: NavigationListItem(
+                        title: TranslationConsts.logout.t(context),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          BlocProvider.of<LoginBloc>(context).add(LogoutUserEvent());
+                        },
+                      ),
                     ),
                   ],
                 ),

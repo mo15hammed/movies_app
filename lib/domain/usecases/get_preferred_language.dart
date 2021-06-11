@@ -11,7 +11,6 @@ class GetPreferredLanguage extends UseCase<String, NoParams> {
 
   @override
   Future<Either<AppError, String>> call(NoParams noParams) async {
-    return await appRepository.getPreferredLanguage();
+    return appRepository.getPreferredLanguage();
   }
-
 }

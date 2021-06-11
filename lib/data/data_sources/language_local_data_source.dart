@@ -1,8 +1,9 @@
 import 'package:hive/hive.dart';
 
+const String LANG_BOX = 'languageBox';
+const String LANG_KEY = 'preferred_language';
+
 abstract class LanguageLocalDataSource {
-  final String langKey = 'preferred_language';
-  final String langBoxName = 'languageBox';
   Future<void> updateLanguage(String language);
   Future<String> getPreferredLanguage();
 }
@@ -10,14 +11,14 @@ abstract class LanguageLocalDataSource {
 class LanguageLocalDataSourceImpl extends LanguageLocalDataSource {
   @override
   Future<String> getPreferredLanguage() async {
-    final langBox = await Hive.openBox(langBoxName);
-    return langBox.get(langKey);
+    final langBox = await Hive.openBox(LANG_BOX);
+    return langBox.get(LANG_KEY);
   }
 
   @override
   Future<void> updateLanguage(String langCode) async {
-    final langBox = await Hive.openBox(langBoxName);
-    langBox.put(langKey, langCode);
+    final langBox = await Hive.openBox(LANG_BOX);
+    langBox.put(LANG_KEY, langCode);
   }
 
 }

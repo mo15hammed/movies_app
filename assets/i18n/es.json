@@ -19,6 +19,16 @@
   "noFavMovies": "No se encontraron películas favoritas.",
 
   "cast": "Reparto",
-  "watchTrailers": "Ver trailers"
+  "watchTrailers": "Ver trailers",
 
+  "loginToMovieApp": "Inicie sesión en la aplicación de películas a través de TMDb",
+  "username": "Nombre de usuario",
+  "password": "Contraseña",
+  "signIn": "Registrarse",
+  "logout": "Cerrar sesión",
+  "wrongUsernamePassword": "El nombre de usuario o la contraseña no son válidos.",
+  "noNetwork": "No hay conexion de red",
+  "sessionDenied": "Sesión denegada",
+  "enterTMDbUsername": "Ingrese el nombre de usuario de TMDb aquí ...",
+  "enterPassword": "Ingrese la contraseña aquí..."
 }

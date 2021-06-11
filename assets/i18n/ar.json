@@ -19,5 +19,16 @@
   "noFavMovies": "لم يتم العثور على أفلام مفضلة.",
 
   "cast": "طاقم التمثيل",
-  "watchTrailers": "مشاهدة الإعلانات"
+  "watchTrailers": "مشاهدة الإعلانات",
+
+  "loginToMovieApp": "سجل الدخول إلى تطبيق Movie عن طريق TMDb",
+  "username": "اسم المستخدم",
+  "password": "كلمة المرور",
+  "signIn": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
+  "wrongUsernamePassword": "اسم المستخدم أو كلمة المرور غير صحيحة",
+  "noNetwork": "لا يوجد اتصال بالانترنت",
+  "sessionDenied": "تم رفض الجلسة",
+  "enterTMDbUsername": "أدخل اسم مستخدم TMDb هنا...",
+  "enterPassword": "أدخل كلمة مرور TMDb هنا..."
 }
