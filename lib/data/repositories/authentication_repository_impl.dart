@@ -79,7 +79,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
   Either<AppError, String> getUserSession() {
     final sessionId = _localDataSource.getSessionId();
-    print('getUserSession(): sessionId::: ' + sessionId);
+    print('getUserSession(): sessionId::: ' + sessionId.toString());
     if (sessionId != null && sessionId.isNotEmpty) {
       return Right(sessionId);
     }

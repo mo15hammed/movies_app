@@ -45,46 +45,46 @@ class MovieApp extends StatelessWidget {
           builder: (context, state) {
             print(state);
             if (state is LanguageLoaded) {
-              return MaterialApp(
-                navigatorKey: _navigationKey,
-                debugShowCheckedModeBanner: false,
-                title: 'Movie App',
-                theme: ThemeData(
-                  brightness: Brightness.dark,
-                  unselectedWidgetColor: AppColor.royalBlue,
-                  primaryColor: AppColor.vulcan,
-                  scaffoldBackgroundColor: AppColor.vulcan,
-                  accentColor: AppColor.royalBlue,
-                  visualDensity: VisualDensity.adaptivePlatformDensity,
-                  textTheme: ThemeText.getTextTheme(),
-                  appBarTheme: const AppBarTheme(elevation: 0),
-                  textSelectionTheme: TextSelectionThemeData(
-                    cursorColor: AppColor.royalBlue,
-                    selectionColor: AppColor.royalBlue,
-                    selectionHandleColor: AppColor.royalBlue,
+              return WiredashApp(
+                navigationKey: _navigationKey,
+                languageCode: state.locale.languageCode,
+                child: MaterialApp(
+                  navigatorKey: _navigationKey,
+                  debugShowCheckedModeBanner: false,
+                  title: 'Movie App',
+                  theme: ThemeData(
+                    brightness: Brightness.dark,
+                    unselectedWidgetColor: AppColor.royalBlue,
+                    primaryColor: AppColor.vulcan,
+                    scaffoldBackgroundColor: AppColor.vulcan,
+                    accentColor: AppColor.royalBlue,
+                    visualDensity: VisualDensity.adaptivePlatformDensity,
+                    textTheme: ThemeText.getTextTheme(),
+                    appBarTheme: const AppBarTheme(elevation: 0),
+                    textSelectionTheme: TextSelectionThemeData(
+                      cursorColor: AppColor.royalBlue,
+                      selectionColor: AppColor.royalBlue,
+                      selectionHandleColor: AppColor.royalBlue,
+                    ),
                   ),
+                  supportedLocales: Languages.languages.map((e) => Locale(e.code)).toList(),
+                  locale: state.locale,
+                  localizationsDelegates: [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    AppLocalization.delegate,
+                  ],
+                  // home: HomeScreen(),
+                  builder: (context, child) {
+                    return LoadingScreen(screen: child);
+                  },
+                  // initialRoute: RouteList.home,
+                  onGenerateRoute: (RouteSettings settings) {
+                    final routes = Routes.getRoutes(settings);
+                    final WidgetBuilder builder = routes[settings.name];
+                    return SlideVerticalPageRouteBuilder(builder: builder, settings: settings);
+                  },
                 ),
-                supportedLocales: Languages.languages.map((e) => Locale(e.code)).toList(),
-                locale: state.locale,
-                localizationsDelegates: [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  AppLocalization.delegate,
-                ],
-                // home: HomeScreen(),
-                builder: (context, child) {
-                  return WiredashApp(
-                    navigationKey: _navigationKey,
-                    languageCode: state.locale.languageCode,
-                    child: LoadingScreen(screen: child),
-                  );
-                },
-                // initialRoute: RouteList.home,
-                onGenerateRoute: (RouteSettings settings) {
-                  final routes = Routes.getRoutes(settings);
-                  final WidgetBuilder builder = routes[settings.name];
-                  return SlideVerticalPageRouteBuilder(builder: builder, settings: settings);
-                },
               );
             }
             return const SizedBox.shrink();
