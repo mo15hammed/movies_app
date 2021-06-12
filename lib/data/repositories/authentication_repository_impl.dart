@@ -67,12 +67,25 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
 
   @override
   Future<Either<AppError, void>> logoutUser() async {
-    final sessionId = await _localDataSource.getSessionId();
+    final sessionId = _localDataSource.getSessionId();
     await Future.wait([
       _remoteDataSource.deleteSession(sessionId),
       _localDataSource.deleteSessionId(),
     ]);
-    print(await _localDataSource.getSessionId());
+    print('logoutUser(): sessionId::: ' + _localDataSource.getSessionId());
     return Right(Unit);
+  }
+
+  @override
+  Either<AppError, String> getUserSession() {
+    final sessionId = _localDataSource.getSessionId();
+    print('getUserSession(): sessionId::: ' + sessionId);
+    if (sessionId != null && sessionId.isNotEmpty) {
+      return Right(sessionId);
+    }
+    return Left(AppError(
+      message: 'UNAUTHORIZED',
+      errorType: AppErrorType.unauthorized,
+    ));
   }
 }

@@ -7,7 +7,15 @@ abstract class LoginState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginInitial extends LoginState {}
+class LoginInitial extends LoginState {
+  final String sessionId;
+
+  LoginInitial(this.sessionId);
+
+  @override
+  List<Object> get props => [sessionId];
+
+}
 
 class LoginSuccess extends LoginState {}
 

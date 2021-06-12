@@ -21,7 +21,7 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
     @required this.updateLanguage,
   }) : super(
           LanguageLoaded(
-            Locale(Languages.languages[0].code),
+            Locale(getPreferredLanguage(NoParams()).getOrElse(() => Languages.languages[0].code)),
           ),
         );
 
@@ -30,10 +30,10 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
     LanguageEvent event,
   ) async* {
     if (event is ChangeLanguageEvent) {
-      await updateLanguage(event.language.code);
+      updateLanguage(event.language.code);
       add(LoadPreferredLanguageEvent());
     } else if (event is LoadPreferredLanguageEvent) {
-      final response = await getPreferredLanguage(NoParams());
+      final response = getPreferredLanguage(NoParams());
       yield response.fold(
         (l) => LanguageError(),
         (r) => LanguageLoaded(Locale(r)),

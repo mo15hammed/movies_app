@@ -12,10 +12,8 @@ abstract class MovieTabbedState extends Equatable {
 class MovieTabbedInitial extends MovieTabbedState {}
 
 class MovieTabLoading extends MovieTabbedState {
-  final bool isLoading;
   const MovieTabLoading({
     int currentTabIndex,
-    this.isLoading = true,
   }) : super(currentTabIndex: currentTabIndex);
 }
 

@@ -8,15 +8,18 @@ import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/domain/entities/movie_search_params.dart';
 import 'package:movies_app/domain/usecases/search_movies.dart';
+import 'package:movies_app/presentation/blocs/loading/loading_bloc.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchMovies searchMovies;
+  final LoadingBloc loadingBloc;
 
   SearchBloc({
     @required this.searchMovies,
+    @required this.loadingBloc,
   }) : super(SearchInitial());
 
   @override
@@ -25,6 +28,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   ) async* {
     if (event is LoadSearchMoviesEvent) {
       if (event.query.length >= 1) {
+        loadingBloc.add(StartLoadingEvent());
         yield SearchLoading();
         Either<AppError, List<MovieEntity>> eitherSearch =
         await searchMovies(MovieSearchParams(query: event.query));
@@ -36,6 +40,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           ),
               (movies) => SearchSuccess(movies),
         );
+        loadingBloc.add(FinishLoadingEvent());
       }
     }
   }

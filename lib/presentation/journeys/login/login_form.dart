@@ -38,72 +38,70 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: Sizes.dimen_32.h,
-          horizontal: Sizes.dimen_20.w,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              TranslationConsts.loginToMovieApp.t(context),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-            SizedBox(height: Sizes.dimen_18.h),
-            LabelFieldWidget(
-              label: TranslationConsts.username.t(context),
-              hint: TranslationConsts.enterTMDbUsername.t(context),
-              controller: _usernameCtrl,
-            ),
-            SizedBox(height: Sizes.dimen_14.h),
-            LabelFieldWidget(
-              label: TranslationConsts.password.t(context),
-              hint: TranslationConsts.enterPassword.t(context),
-              controller: _passwordCtrl,
-              isPassword: true,
-            ),
-            SizedBox(height: Sizes.dimen_14.h),
-            BlocConsumer<LoginBloc, LoginState>(
-              listenWhen: (previous, current) => current is LoginSuccess,
-              buildWhen: (previous, current) => current is LoginError,
-              listener: (context, state) {
-                if (state is LoginSuccess) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    RouteList.home,
-                    (route) => false,
-                  );
-                }
-              },
-              builder: (context, state) {
-                print(state);
-                if (state is LoginError)
-                  return Text(
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: Sizes.dimen_32.h,
+        horizontal: Sizes.dimen_20.w,
+      ),
+      child: Column(
+        children: [
+          Text(
+            TranslationConsts.loginToMovieApp.t(context),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          SizedBox(height: Sizes.dimen_18.h),
+          LabelFieldWidget(
+            label: TranslationConsts.username.t(context),
+            hint: TranslationConsts.enterTMDbUsername.t(context),
+            controller: _usernameCtrl,
+          ),
+          SizedBox(height: Sizes.dimen_14.h),
+          LabelFieldWidget(
+            label: TranslationConsts.password.t(context),
+            hint: TranslationConsts.enterPassword.t(context),
+            controller: _passwordCtrl,
+            isPassword: true,
+          ),
+          SizedBox(height: Sizes.dimen_14.h),
+          BlocConsumer<LoginBloc, LoginState>(
+            listenWhen: (previous, current) => current is LoginSuccess,
+            buildWhen: (previous, current) => current is LoginError,
+            listener: (context, state) {
+              if (state is LoginSuccess) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  RouteList.home,
+                  (route) => false,
+                );
+              }
+            },
+            builder: (context, state) {
+              print(state);
+              if (state is LoginError)
+                return Padding(
+                  padding: EdgeInsets.only(bottom: Sizes.dimen_8.h),
+                  child: Text(
                     AppError.getMsgByErrorType(state.errorType).t(context),
                     style: Theme.of(context).textTheme.orangeSubtitle2,
-                  );
-                return const SizedBox.shrink();
-              },
-            ),
-            SizedBox(height: Sizes.dimen_14.h),
-            Button(
-              text: TranslationConsts.signIn.t(context),
-              onPressed: () {
-                if (_usernameCtrl.text.isNotEmpty && _passwordCtrl.text.isNotEmpty) {
-                  getItInstance<LoginBloc>().add(
-                    LoginUserEvent(
-                      username: _usernameCtrl.text,
-                      password: _passwordCtrl.text,
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
-        ),
+                  ),
+                );
+              return const SizedBox.shrink();
+            },
+          ),
+          Button(
+            text: TranslationConsts.signIn.t(context),
+            onPressed: () {
+              if (_usernameCtrl.text.isNotEmpty && _passwordCtrl.text.isNotEmpty) {
+                getItInstance<LoginBloc>().add(
+                  LoginUserEvent(
+                    username: _usernameCtrl.text,
+                    password: _passwordCtrl.text,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }

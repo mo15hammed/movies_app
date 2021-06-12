@@ -3,10 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/common/constants/languages.dart';
+import 'package:movies_app/common/constants/route_constants.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/app_localization.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
+import 'package:movies_app/presentation/blocs/loading/loading_bloc.dart';
+import 'package:movies_app/presentation/blocs/loading/loading_bloc.dart';
 import 'package:movies_app/presentation/blocs/login/login_bloc.dart';
+import 'package:movies_app/presentation/journeys/loading/loading_screen.dart';
 import 'package:movies_app/presentation/routes.dart';
 import 'package:movies_app/presentation/themes/theme_color.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
@@ -31,8 +35,8 @@ class MovieApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LanguageBloc>.value(
-            value: getItInstance<LanguageBloc>()..add(LoadPreferredLanguageEvent())),
+        BlocProvider<LanguageBloc>.value(value: getItInstance<LanguageBloc>()),
+        BlocProvider<LoadingBloc>.value(value: getItInstance<LoadingBloc>()),
         BlocProvider<LoginBloc>.value(value: getItInstance<LoginBloc>()),
       ],
       child: ScreenUtilInit(
@@ -72,14 +76,13 @@ class MovieApp extends StatelessWidget {
                   return WiredashApp(
                     navigationKey: _navigationKey,
                     languageCode: state.locale.languageCode,
-                    child: child,
+                    child: LoadingScreen(screen: child),
                   );
                 },
                 // initialRoute: RouteList.home,
                 onGenerateRoute: (RouteSettings settings) {
                   final routes = Routes.getRoutes(settings);
                   final WidgetBuilder builder = routes[settings.name];
-
                   return SlideVerticalPageRouteBuilder(builder: builder, settings: settings);
                 },
               );

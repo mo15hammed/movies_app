@@ -11,17 +11,21 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: Sizes.dimen_100.h),
-                child: Logo(height: Sizes.dimen_100.h),
-              ),
-              LoginForm(),
-            ],
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            clipBehavior: Clip.none,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: Sizes.dimen_32.h),
+                  child: Logo(height: Sizes.dimen_100.h),
+                ),
+                LoginForm(),
+              ],
+            ),
           ),
         ),
       ),

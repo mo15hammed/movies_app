@@ -26,6 +26,7 @@ dependencies:
 
   equatable: ^2.0.0
   flutter_screenutil: ^5.0.0+2
+  flare_flutter: ^3.0.1
 
   #network
   dio: ^4.0.0
@@ -89,6 +90,8 @@ flutter:
     - assets/pngs/
     - assets/svgs/
     - assets/i18n/
+    - assets/animations/
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

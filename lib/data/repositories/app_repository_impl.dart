@@ -10,9 +10,9 @@ class AppRepositoryImpl extends AppRepository {
 
 
   @override
-  Future<Either<AppError, String>> getPreferredLanguage() async {
+  Either<AppError, String> getPreferredLanguage() {
     try {
-      final response = await localDataSource.getPreferredLanguage() ?? 'en';
+      final response = localDataSource.getPreferredLanguage() ?? 'en';
       return Right(response);
     } catch (e) {
       return Left(
@@ -22,9 +22,9 @@ class AppRepositoryImpl extends AppRepository {
   }
 
   @override
-  Future<Either<AppError, void>> updateLanguage(String langCode) async {
+  Either<AppError, void> updateLanguage(String langCode) {
     try {
-      final response = await localDataSource.updateLanguage(langCode);
+      final response = localDataSource.updateLanguage(langCode);
       return Right(response);
     } catch (e) {
       return Left(

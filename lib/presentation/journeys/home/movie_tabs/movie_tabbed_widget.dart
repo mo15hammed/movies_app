@@ -7,6 +7,7 @@ import 'package:movies_app/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dar
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_listview_widget.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_tabbed_constants.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_title_widget.dart';
+import 'package:movies_app/presentation/journeys/loading/loading_circle.dart';
 import 'package:movies_app/presentation/widgets/app_error_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -62,7 +63,9 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget> with SingleTicker
               if (state is MovieTabLoading)
                 Expanded(
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: LoadingCircle(
+                      size: Sizes.dimen_100.w,
+                    ),
                   ),
                 ),
               if (state is MovieTabChanged)

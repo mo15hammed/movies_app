@@ -10,6 +10,7 @@ import 'package:movies_app/data/repositories/movie_repository_impl.dart';
 import 'package:movies_app/domain/repositories/app_repository.dart';
 import 'package:movies_app/domain/repositories/authentication_repository.dart';
 import 'package:movies_app/domain/repositories/movie_repository.dart';
+import 'package:movies_app/domain/usecases/get_user_session.dart';
 import 'package:movies_app/domain/usecases/login_user.dart';
 import 'package:movies_app/domain/usecases/delete_fav_movie.dart';
 import 'package:movies_app/domain/usecases/get_cast.dart';
@@ -29,6 +30,7 @@ import 'package:movies_app/domain/usecases/update_language.dart';
 import 'package:movies_app/presentation/blocs/cast/cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/favorite/favorite_bloc.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
+import 'package:movies_app/presentation/blocs/loading/loading_bloc.dart';
 import 'package:movies_app/presentation/blocs/login/login_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
@@ -80,21 +82,33 @@ Future init() async {
   getItInstance.registerLazySingleton<UpdateLanguage>(() => UpdateLanguage(getItInstance()));
   getItInstance.registerLazySingleton<LoginUser>(() => LoginUser(getItInstance()));
   getItInstance.registerLazySingleton<LogoutUser>(() => LogoutUser(getItInstance()));
+  getItInstance.registerLazySingleton<GetUserSession>(() => GetUserSession(getItInstance()));
 
   // blocs
 
-  getItInstance.registerSingleton<LoginBloc>(LoginBloc(loginUser: getItInstance(), logoutUser: getItInstance()),
+  getItInstance.registerLazySingleton<LoginBloc>(
+    () => LoginBloc(
+      loginUser: getItInstance(),
+      logoutUser: getItInstance(),
+      getUserSession: getItInstance(),
+      loadingBloc: getItInstance(),
+    ),
   );
 
   getItInstance.registerLazySingleton<LanguageBloc>(
-      () => LanguageBloc(
+    () => LanguageBloc(
       getPreferredLanguage: getItInstance(),
       updateLanguage: getItInstance(),
     ),
   );
 
+  getItInstance.registerLazySingleton<LoadingBloc>(
+    () => LoadingBloc(),
+  );
+
   getItInstance.registerFactory<MovieCarouselBloc>(
     () => MovieCarouselBloc(
+      loadingBloc: getItInstance(),
       getTrending: getItInstance(),
       movieBackdropBloc: getItInstance(),
     ),
@@ -118,6 +132,7 @@ Future init() async {
       castBloc: getItInstance(),
       videosBloc: getItInstance(),
       favoriteBloc: getItInstance(),
+      loadingBloc: getItInstance(),
     ),
   );
 
@@ -132,6 +147,7 @@ Future init() async {
   getItInstance.registerFactory(
     () => SearchBloc(
       searchMovies: getItInstance(),
+      loadingBloc: getItInstance(),
     ),
   );
 
