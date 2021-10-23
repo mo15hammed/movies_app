@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/di/get_it.dart';
+import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
+import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MovieCarouselBloc>(
+          create: (_) => getItInstance<MovieCarouselBloc>()
+            ..add(const CarouselLoadEvent(defaultIndex: 0)),
+        ),
+        BlocProvider<MovieBackdropBloc>(
+          create: (_) => getItInstance<MovieBackdropBloc>(),
+        ),
+      ],
+      child: Scaffold(
+        body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
+          builder: (context, state) {
+            if (state is MovieCarouselLoaded) {
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  FractionallySizedBox(
+                    alignment: Alignment.topCenter,
+                    heightFactor: 0.6,
+                    child: MovieCarouselWidget(
+                      movies: state.movies,
+                      index: state.defaultIndex,
+                    ),
+                  ),
+                  const FractionallySizedBox(
+                    alignment: Alignment.bottomCenter,
+                    heightFactor: 0.4,
+                    child: Placeholder(color: Colors.green),
+                  ),
+                ],
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
+      ),
+    );
+  }
+}

@@ -18,7 +18,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<MovieModel>> getTrending() async {
     final data = await _dioHelper.get('trending/movie/day');
     final movies = MoviesResultModel.fromJson(data).movies;
-    print(movies);
+    // print(movies);
     return movies ?? [];
   }
 
@@ -26,7 +26,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<MovieModel>> getPopular() async {
     final data = await _dioHelper.get('movie/popular');
     final movies = MoviesResultModel.fromJson(data).movies;
-    print(movies);
+    // print(movies);
     return movies ?? [];
   }
 
@@ -34,7 +34,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<MovieModel>> getPlayingNow() async {
     final data = await _dioHelper.get('movie/now_playing');
     final movies = MoviesResultModel.fromJson(data).movies;
-    print(movies);
+    // print(movies);
     return movies ?? [];
   }
 
@@ -42,7 +42,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<MovieModel>> getComingSoon() async {
     final data = await _dioHelper.get('movie/upcoming');
     final movies = MoviesResultModel.fromJson(data).movies;
-    print(movies);
+    // print(movies);
     return movies ?? [];
   }
 

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:movies_app/common/api_constants.dart';
+import 'package:movies_app/common/constants/api_constants.dart';
 
 class DioHelper {
   final Dio _dio;
@@ -11,8 +11,8 @@ class DioHelper {
     Map<String, dynamic>? queryParams,
   }) async {
     final res = await _dio.get(
-      ApiConstants.BASE_URL + path,
-      queryParameters: {...?queryParams, 'api_key': ApiConstants.API_KEY},
+      ApiConstants.baseUrl + path,
+      queryParameters: {...?queryParams, 'api_key': ApiConstants.apiKey},
       options: Options(
         headers: {
           'Content-Type': 'application/json',

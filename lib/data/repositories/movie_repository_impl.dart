@@ -16,7 +16,7 @@ class MovieRepositoryImpl extends MovieRepository {
       final movies = await remoteDataSource.getTrending();
       return Right(movies);
     } on Exception {
-      return Left(AppError('Something went wrong!'));
+      return const Left(AppError('Something went wrong!'));
     }
   }
 
@@ -26,7 +26,7 @@ class MovieRepositoryImpl extends MovieRepository {
       final movies = await remoteDataSource.getPopular();
       return Right(movies);
     } on Exception {
-      return Left(AppError('something went wrong!'));
+      return const Left(AppError('something went wrong!'));
     }
   }
 
@@ -36,7 +36,7 @@ class MovieRepositoryImpl extends MovieRepository {
       final movies = await remoteDataSource.getPlayingNow();
       return Right(movies);
     } on Exception {
-      return Left(AppError('something went wrong!'));
+      return const Left(AppError('something went wrong!'));
     }
   }
 
@@ -46,7 +46,7 @@ class MovieRepositoryImpl extends MovieRepository {
       final movies = await remoteDataSource.getComingSoon();
       return Right(movies);
     } on Exception {
-      return Left(AppError('something went wrong!'));
+      return const Left(AppError('something went wrong!'));
     }
   }
 }

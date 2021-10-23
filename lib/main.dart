@@ -1,33 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/domain/entities/movie_entity.dart';
-import 'package:movies_app/domain/entities/no_params.dart';
-import 'package:movies_app/domain/usecases/get_trending.dart';
-import 'package:dartz/dartz.dart';
-import 'domain/entities/app_error.dart';
-import 'di/get_it.dart' as getIt;
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/presentation/blocs/debug/app_bloc_observer.dart';
+import 'package:movies_app/presentation/movie_app.dart';
+import 'di/get_it.dart' as get_it;
 
-Future<void> main() async {
-  getIt.init();
-  GetTrending getTrending = getIt.getItInstance<GetTrending>();
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  Bloc.observer = AppBlocObserver();
+  get_it.init();
 
-  final Either<AppError, List<MovieEntity>> eitherRes = await getTrending(NoParams());
-
-  eitherRes.fold((l) {
-    print('error');
-    print(l.message);
-  }, (movies) {
-    print('list of movies');
-    print(movies);
-  });
-
-  runApp(MovieApp());
+  runApp(const MovieApp());
 }
 
-class MovieApp extends StatelessWidget {
-  const MovieApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}

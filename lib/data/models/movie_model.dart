@@ -1,42 +1,36 @@
+import 'package:movies_app/common/constants/api_constants.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 
 class MovieModel extends MovieEntity {
-  final String? overview;
-  final int? id;
   final bool? adult;
-  final String? backdropPath;
   final List<int>? genreIds;
   final int? voteCount;
   final String? originalLanguage;
   final String? originalTitle;
-  final String? posterPath;
-  final String? title;
   final bool? video;
-  final double? voteAverage;
-  final String? releaseDate;
   final double? popularity;
   final String? mediaType;
 
-  MovieModel({
-    this.overview,
-    this.id,
+  const MovieModel({
+    overview,
+    id,
     this.adult,
-    this.backdropPath,
+    backdropPath,
     this.genreIds,
     this.voteCount,
     this.originalLanguage,
     this.originalTitle,
-    this.posterPath,
-    this.title,
+    posterPath,
+    title,
     this.video,
-    this.voteAverage,
-    this.releaseDate,
+    voteAverage,
+    releaseDate,
     this.popularity,
     this.mediaType,
   }) : super(
           id: id,
-          backdropPath: backdropPath,
-          posterPath: posterPath,
+          backdropPath: ApiConstants.baseImageUrl + (backdropPath ?? ''),
+          posterPath: ApiConstants.baseImageUrl + (posterPath ?? ''),
           releaseDate: releaseDate,
           title: title,
           voteAverage: voteAverage,
@@ -81,4 +75,5 @@ class MovieModel extends MovieEntity {
     map['popularity'] = popularity;
     map['media_type'] = mediaType;
     return map;
-  }}
+  }
+}
