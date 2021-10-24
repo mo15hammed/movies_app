@@ -10,6 +10,7 @@ import 'package:movies_app/domain/usecases/get_popular.dart';
 import 'package:movies_app/domain/usecases/get_trending.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
 
 final getItInstance = GetIt.I;
 
@@ -43,10 +44,16 @@ void init() {
 
   // blocs
   getItInstance.registerFactory<MovieCarouselBloc>(
-        () => MovieCarouselBloc(getItInstance()),
+    () => MovieCarouselBloc(getItInstance()),
   );
-
   getItInstance.registerFactory<MovieBackdropBloc>(
-        () => MovieBackdropBloc(),
+    () => MovieBackdropBloc(),
+  );
+  getItInstance.registerFactory<MovieTabsBloc>(
+    () => MovieTabsBloc(
+      getPopular: getItInstance(),
+      getPlayingNow: getItInstance(),
+      getComingSoon: getItInstance(),
+    ),
   );
 }

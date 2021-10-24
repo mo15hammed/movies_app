@@ -49,7 +49,7 @@ class _MoviePageViewState extends State<MoviePageView> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: Sizes.dimen_10.h),
-      height: 0.35.sh,
+      height: 0.40.sh,
       clipBehavior: Clip.none,
       child: PageView.builder(
         controller: _pageController,

@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
+
+import 'movie_tabs/movie_tab_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,10 +17,14 @@ class HomeScreen extends StatelessWidget {
       providers: [
         BlocProvider<MovieCarouselBloc>(
           create: (_) => getItInstance<MovieCarouselBloc>()
-            ..add(const CarouselLoadEvent(defaultIndex: 0)),
+            ..add(const CarouselLoadEvent()),
         ),
         BlocProvider<MovieBackdropBloc>(
           create: (_) => getItInstance<MovieBackdropBloc>(),
+        ),
+        BlocProvider<MovieTabsBloc>(
+          create: (_) =>
+              getItInstance<MovieTabsBloc>()..add(const MovieTabChangedEvent()),
         ),
       ],
       child: Scaffold(
@@ -38,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                   const FractionallySizedBox(
                     alignment: Alignment.bottomCenter,
                     heightFactor: 0.4,
-                    child: Placeholder(color: Colors.green),
+                    child: MovieTabBarWidget(),
                   ),
                 ],
               );

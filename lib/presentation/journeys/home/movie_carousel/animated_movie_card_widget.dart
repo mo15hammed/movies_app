@@ -31,7 +31,7 @@ class AnimatedMovieCardWidget extends StatelessWidget {
         return Align(
           alignment: Alignment.topCenter,
           child: SizedBox(
-            height: Curves.easeIn.transform(value) * 0.35.sh,
+            height: Curves.easeIn.transform(value) * 0.40.sh,
             width: Curves.easeIn.transform(value) * Sizes.dimen_230,
             child: child,
           ),
