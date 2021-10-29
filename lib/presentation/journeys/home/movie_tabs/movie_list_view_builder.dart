@@ -14,7 +14,6 @@ class MovieListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(movies);
     return ListView.separated(
       padding: EdgeInsets.symmetric(
         vertical: Sizes.dimen_12.h,

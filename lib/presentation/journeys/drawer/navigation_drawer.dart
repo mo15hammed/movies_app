@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/common/constants/locale_keys.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/di/get_it.dart';
+import 'package:movies_app/domain/entities/language_entity.dart';
+import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'navigation_expanded_list_item.dart';
 import 'navigation_list_item.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({
@@ -30,11 +35,9 @@ class NavigationDrawer extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.only(
-                top: Sizes.dimen_20.h,
-                bottom: Sizes.dimen_56.h,
-                start: Sizes.dimen_28.w,
-                end: Sizes.dimen_28.w,
+              padding: EdgeInsets.symmetric(
+                vertical: Sizes.dimen_56.h,
+                horizontal: Sizes.dimen_28.w,
               ),
               child: const Logo(),
             ),
@@ -52,20 +55,27 @@ class NavigationDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   NavigationListItem(
-                    title: 'Favorite Movies',
+                    title: LocaleKeys.favMovies.tr(),
                     onPressed: () {},
                   ),
                   NavigationExpandedListItem(
-                    title: 'Language',
-                    onPressed: () {},
-                    children: const ['English', 'Arabic'],
+                    title: LocaleKeys.language.tr(),
+                    onPressed: (index) {
+                      // context.read<LanguageBloc>().add(
+                      //     ToggleLanguageEvent(LanguageEntity.languages[index]));
+                      context.setLocale(LanguageEntity.locales[index]);
+
+                    },
+                    children: LanguageEntity.languages
+                        .map((lang) => lang.value)
+                        .toList(),
                   ),
                   NavigationListItem(
-                    title: 'Feedback',
+                    title: LocaleKeys.feedback.tr(),
                     onPressed: () {},
                   ),
                   NavigationListItem(
-                    title: 'About',
+                    title: LocaleKeys.about.tr(),
                     onPressed: () {},
                   ),
                 ],

@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_list_view_builder.dart';
-import 'package:movies_app/presentation/journeys/home/movie_tabs/tab.dart';
+import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_entity.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_item_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MovieTabBarWidget extends StatelessWidget {
   const MovieTabBarWidget({
@@ -28,9 +29,9 @@ class MovieTabBarWidget extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: TabModel.movieTabs.map((tab) {
+                children: TabEntity.movieTabs.map((tab) {
                   return TabItemWidget(
-                    title: tab.title,
+                    title: tab.title.tr(),
                     isSelected: state.currentTabIndex == tab.index,
                     onTap: () => _onTabTapped(context, tab.index),
                   );
