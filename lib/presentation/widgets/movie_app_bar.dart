@@ -11,7 +11,7 @@ class MovieAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(
-        top: ScreenUtil().statusBarHeight + Sizes.dimen_4,
+        top: MediaQuery.of(context).padding.top + Sizes.dimen_4,
         start: Sizes.dimen_16,
         end: Sizes.dimen_16,
       ),
@@ -19,7 +19,9 @@ class MovieAppBar extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
             icon: SvgPicture.asset(
               'assets/svgs/menu.svg',
               height: Sizes.dimen_28,

@@ -4,6 +4,7 @@ import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
+import 'package:movies_app/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
 
 import 'movie_tabs/movie_tab_bar_widget.dart';
@@ -28,6 +29,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
       child: Scaffold(
+        drawer: const NavigationDrawer(),
         body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
           builder: (context, state) {
             if (state is MovieCarouselLoaded) {
