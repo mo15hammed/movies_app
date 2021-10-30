@@ -6,6 +6,7 @@ import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
+import 'movie_carousel/app_error_widget.dart';
 import 'movie_tabs/movie_tab_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       providers: [
         BlocProvider<MovieCarouselBloc>(
           create: (_) => getItInstance<MovieCarouselBloc>()
-            ..add(const CarouselLoadEvent()),
+            ..add(const MovieCarouselLoadEvent()),
         ),
         BlocProvider<MovieBackdropBloc>(
           create: (_) => getItInstance<MovieBackdropBloc>(),
@@ -49,6 +50,15 @@ class HomeScreen extends StatelessWidget {
                     child: MovieTabBarWidget(),
                   ),
                 ],
+              );
+            }
+            else if (state is MovieCarouselError) {
+              return AppErrorWidget(
+                message: state.message,
+                errorType: state.errorType,
+                onRetryPressed: () => context
+                    .read<MovieCarouselBloc>()
+                    .add(const MovieCarouselLoadEvent()),
               );
             }
             return const SizedBox.shrink();

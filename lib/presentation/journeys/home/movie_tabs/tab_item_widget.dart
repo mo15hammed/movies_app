@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/presentation/themes/app_colors.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TabItemWidget extends StatelessWidget {
   final String title;
@@ -20,6 +21,10 @@ class TabItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: isSelected ? () => {} : onTap,
       child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: Sizes.dimen_6.h,
+          horizontal: Sizes.dimen_12.w,
+        ),
         decoration: BoxDecoration(
           color: Colors.transparent,
           border: Border(

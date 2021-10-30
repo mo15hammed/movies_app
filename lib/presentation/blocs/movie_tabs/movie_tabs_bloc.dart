@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -48,7 +46,11 @@ class MovieTabsBloc extends Bloc<MovieTabsEvent, MovieTabsState> {
         break;
     }
     MovieTabsState state = moviesEither.fold(
-      (l) => MovieTabLoadError(currentTabIndex: event.currentTabIndex),
+      (l) => MovieTabLoadError(
+        currentTabIndex: event.currentTabIndex,
+        message: l.message,
+        errorType: l.errorType,
+      ),
       (movies) {
         return MovieTabLoadSuccess(
           currentTabIndex: event.currentTabIndex,
@@ -58,13 +60,5 @@ class MovieTabsBloc extends Bloc<MovieTabsEvent, MovieTabsState> {
     );
 
     emit(state);
-
-    print(
-      state ==
-          MovieTabLoadSuccess(
-            currentTabIndex: event.currentTabIndex,
-            movies: [],
-          ),
-    );
   }
 }

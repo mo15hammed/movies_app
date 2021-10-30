@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
+import 'package:movies_app/presentation/journeys/home/movie_carousel/app_error_widget.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_list_view_builder.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_entity.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_item_widget.dart';
@@ -41,7 +42,19 @@ class MovieTabBarWidget extends StatelessWidget {
               if (state is MovieTabLoadSuccess)
                 Expanded(
                   child: MovieListViewBuilder(movies: state.movies),
-                )
+                ),
+              if (state is MovieTabLoadError)
+                Expanded(
+                  child: AppErrorWidget(
+                    message: state.message,
+                    errorType: state.errorType,
+                    onRetryPressed: () {
+                      context.read<MovieTabsBloc>().add(MovieTabChangedEvent(
+                            currentTabIndex: state.currentTabIndex,
+                          ));
+                    },
+                  ),
+                ),
             ],
           ),
         );

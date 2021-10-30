@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
 import 'package:movies_app/data/models/movie_model.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
@@ -15,8 +16,20 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getTrending();
       return Right(movies);
-    } on Exception {
-      return const Left(AppError('Something went wrong!'));
+    } on SocketException catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.network,
+          message: e.message,
+        ),
+      );
+    } on Exception catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.api,
+          message: e.toString(),
+        ),
+      );
     }
   }
 
@@ -25,8 +38,20 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getPopular();
       return Right(movies);
-    } on Exception {
-      return const Left(AppError('something went wrong!'));
+    } on SocketException catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.network,
+          message: e.message,
+        ),
+      );
+    } on Exception catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.api,
+          message: e.toString(),
+        ),
+      );
     }
   }
 
@@ -35,8 +60,20 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getPlayingNow();
       return Right(movies);
-    } on Exception {
-      return const Left(AppError('something went wrong!'));
+    } on SocketException catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.network,
+          message: e.message,
+        ),
+      );
+    } on Exception catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.api,
+          message: e.toString(),
+        ),
+      );
     }
   }
 
@@ -45,8 +82,20 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getComingSoon();
       return Right(movies);
-    } on Exception {
-      return const Left(AppError('something went wrong!'));
+    } on SocketException catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.network,
+          message: e.message,
+        ),
+      );
+    } on Exception catch (e) {
+      return Left(
+        AppError(
+          errorType: AppErrorType.api,
+          message: e.toString(),
+        ),
+      );
     }
   }
 }
