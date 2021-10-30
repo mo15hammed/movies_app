@@ -1,16 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/common/constants/api_constants.dart';
 import 'package:movies_app/common/constants/locale_keys.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/domain/entities/language_entity.dart';
-import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
+import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/widgets/app_dialog.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'navigation_expanded_list_item.dart';
 import 'navigation_list_item.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wiredash/wiredash.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({
@@ -62,8 +62,6 @@ class NavigationDrawer extends StatelessWidget {
                   NavigationExpandedListItem(
                     title: LocaleKeys.language.tr(),
                     onPressed: (index) async {
-                      // context.read<LanguageBloc>().add(
-                      //     ToggleLanguageEvent(LanguageEntity.languages[index]));
                       context.setLocale(LanguageEntity.locales[index]);
                     },
                     children: LanguageEntity.languages
@@ -72,11 +70,17 @@ class NavigationDrawer extends StatelessWidget {
                   ),
                   NavigationListItem(
                     title: LocaleKeys.feedback.tr(),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Wiredash.of(context)?.show();
+                    },
                   ),
                   NavigationListItem(
                     title: LocaleKeys.about.tr(),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _showAboutDialog(context);
+                    },
                   ),
                 ],
               ),
@@ -85,5 +89,21 @@ class NavigationDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showAboutDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AppDialog(
+            title: LocaleKeys.about.tr(),
+            desc: LocaleKeys.aboutDesc.tr(),
+            buttonText: LocaleKeys.okay.tr(),
+            image: Image.asset(
+              'assets/pngs/tmdb_logo.png',
+              height: Sizes.dimen_70.h,
+            ),
+          );
+        });
   }
 }

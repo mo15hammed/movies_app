@@ -15,6 +15,11 @@ class ThemeText {
         color: Colors.white,
       );
 
+  static TextStyle get _whiteHeadline5 => _poppinsTextTheme.headline5!.copyWith(
+        fontSize: Sizes.dimen_24.sp,
+        color: Colors.white,
+      );
+
   static TextStyle get _whiteSubtitle1 => _poppinsTextTheme.subtitle1!.copyWith(
         fontSize: Sizes.dimen_16.sp,
         color: Colors.white,
@@ -28,16 +33,23 @@ class ThemeText {
         height: 1.5,
       );
 
+  static TextStyle get _whiteButton => _poppinsTextTheme.button!.copyWith(
+        fontSize: Sizes.dimen_14.sp,
+        color: Colors.white,
+      );
+
   static TextTheme get textTheme => TextTheme(
+        headline5: _whiteHeadline5,
         headline6: _whiteHeadline6,
         subtitle1: _whiteSubtitle1,
         bodyText2: _whiteBodyText2,
+        button: _whiteButton,
       );
 }
 
 extension ThemeTextExtension on TextTheme {
   TextStyle get royalBlueSubtitle1 => subtitle1!.copyWith(
-    color: AppColors.royalBlue,
-    fontWeight: FontWeight.w600,
-  );
+        color: AppColors.royalBlue,
+        fontWeight: FontWeight.w600,
+      );
 }
