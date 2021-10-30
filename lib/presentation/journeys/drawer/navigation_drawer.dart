@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/common/constants/api_constants.dart';
 import 'package:movies_app/common/constants/locale_keys.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,11 +61,10 @@ class NavigationDrawer extends StatelessWidget {
                   ),
                   NavigationExpandedListItem(
                     title: LocaleKeys.language.tr(),
-                    onPressed: (index) {
+                    onPressed: (index) async {
                       // context.read<LanguageBloc>().add(
                       //     ToggleLanguageEvent(LanguageEntity.languages[index]));
                       context.setLocale(LanguageEntity.locales[index]);
-
                     },
                     children: LanguageEntity.languages
                         .map((lang) => lang.value)

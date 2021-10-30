@@ -6,7 +6,7 @@ import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'movie_tabs/movie_tab_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {

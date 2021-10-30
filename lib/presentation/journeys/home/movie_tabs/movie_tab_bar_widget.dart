@@ -24,6 +24,7 @@ class MovieTabBarWidget extends StatelessWidget {
     return BlocBuilder<MovieTabsBloc, MovieTabsState>(
       builder: (context, state) {
         return Padding(
+          key: ValueKey('${context.locale}'),
           padding: EdgeInsets.only(top: Sizes.dimen_4.h),
           child: Column(
             children: [

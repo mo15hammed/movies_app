@@ -10,7 +10,7 @@ class TabEntity {
     required this.title,
   }) : assert(index >= 0, 'index must be greater than 0');
 
-  static const List<TabEntity> movieTabs = [
+  static List<TabEntity> movieTabs = [
     TabEntity(index: 0, title: LocaleKeys.popular),
     TabEntity(index: 1, title: LocaleKeys.now),
     TabEntity(index: 2, title: LocaleKeys.soon),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/common/constants/api_constants.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/themes/app_colors.dart';
@@ -13,7 +14,6 @@ class MovieApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      key: ValueKey('${context.locale}'),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
