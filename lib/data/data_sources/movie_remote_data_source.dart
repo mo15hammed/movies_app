@@ -1,4 +1,5 @@
 import 'package:movies_app/data/core/dio_helper.dart';
+import 'package:movies_app/data/models/movie_details_model.dart';
 import 'package:movies_app/data/models/movie_model.dart';
 import 'package:movies_app/data/models/movies_result_model.dart';
 
@@ -7,6 +8,7 @@ abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getPopular();
   Future<List<MovieModel>> getPlayingNow();
   Future<List<MovieModel>> getComingSoon();
+  Future<MovieDetailsModel> getMovieDetails(int id);
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
@@ -44,6 +46,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     final movies = MoviesResultModel.fromJson(data).movies;
     // print(movies);
     return movies ?? [];
+  }
+
+  @override
+  Future<MovieDetailsModel> getMovieDetails(int id) async {
+    final data = await _dioHelper.get('movie/$id');
+    final movie = MovieDetailsModel.fromJson(data);
+    print(movie);
+    return movie;
   }
 
 }

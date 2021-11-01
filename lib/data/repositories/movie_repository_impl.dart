@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
+import 'package:movies_app/data/models/movie_details_model.dart';
 import 'package:movies_app/data/models/movie_model.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
@@ -18,18 +19,9 @@ class MovieRepositoryImpl extends MovieRepository {
       return Right(movies);
     } on SocketException catch (e) {
       return Left(
-        AppError(
-          errorType: AppErrorType.network,
-          message: e.message,
-        ),
-      );
+          AppError(errorType: AppErrorType.network, message: e.message));
     } on Exception catch (e) {
-      return Left(
-        AppError(
-          errorType: AppErrorType.api,
-          message: e.toString(),
-        ),
-      );
+      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
     }
   }
 
@@ -40,18 +32,9 @@ class MovieRepositoryImpl extends MovieRepository {
       return Right(movies);
     } on SocketException catch (e) {
       return Left(
-        AppError(
-          errorType: AppErrorType.network,
-          message: e.message,
-        ),
-      );
+          AppError(errorType: AppErrorType.network, message: e.message));
     } on Exception catch (e) {
-      return Left(
-        AppError(
-          errorType: AppErrorType.api,
-          message: e.toString(),
-        ),
-      );
+      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
     }
   }
 
@@ -62,18 +45,9 @@ class MovieRepositoryImpl extends MovieRepository {
       return Right(movies);
     } on SocketException catch (e) {
       return Left(
-        AppError(
-          errorType: AppErrorType.network,
-          message: e.message,
-        ),
-      );
+          AppError(errorType: AppErrorType.network, message: e.message));
     } on Exception catch (e) {
-      return Left(
-        AppError(
-          errorType: AppErrorType.api,
-          message: e.toString(),
-        ),
-      );
+      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
     }
   }
 
@@ -84,18 +58,22 @@ class MovieRepositoryImpl extends MovieRepository {
       return Right(movies);
     } on SocketException catch (e) {
       return Left(
-        AppError(
-          errorType: AppErrorType.network,
-          message: e.message,
-        ),
-      );
+          AppError(errorType: AppErrorType.network, message: e.message));
     } on Exception catch (e) {
+      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AppError, MovieDetailsModel>> getMovieDetails(int id) async {
+    try {
+      final movie = await remoteDataSource.getMovieDetails(id);
+      return Right(movie);
+    } on SocketException catch (e) {
       return Left(
-        AppError(
-          errorType: AppErrorType.api,
-          message: e.toString(),
-        ),
-      );
+          AppError(message: e.message, errorType: AppErrorType.network));
+    } on Exception catch (e) {
+      return Left(AppError(message: e.toString(), errorType: AppErrorType.api));
     }
   }
 }
