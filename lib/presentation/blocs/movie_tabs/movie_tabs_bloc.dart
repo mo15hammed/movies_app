@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
@@ -25,7 +24,9 @@ class MovieTabsBloc extends Bloc<MovieTabsEvent, MovieTabsState> {
   }
 
   _onTabChanged(
-      MovieTabChangedEvent event, Emitter<MovieTabsState> emit) async {
+    MovieTabChangedEvent event,
+    Emitter<MovieTabsState> emit,
+  ) async {
     emit(
       MovieTabLoadSuccess(
         currentTabIndex: event.currentTabIndex,
@@ -33,32 +34,28 @@ class MovieTabsBloc extends Bloc<MovieTabsEvent, MovieTabsState> {
       ),
     );
 
-    late final Either<AppError, List<MovieEntity>> moviesEither;
-    switch (event.currentTabIndex) {
-      case 0:
-        moviesEither = await getPopular(NoParams());
-        break;
-      case 1:
-        moviesEither = await getPlayingNow(NoParams());
-        break;
-      case 2:
-        moviesEither = await getComingSoon(NoParams());
-        break;
-    }
-    MovieTabsState state = moviesEither.fold(
-      (l) => MovieTabLoadError(
-        currentTabIndex: event.currentTabIndex,
-        message: l.message,
-        errorType: l.errorType,
+    final tabActions = [
+      await getPopular(NoParams()),
+      await getPlayingNow(NoParams()),
+      await getComingSoon(NoParams()),
+    ];
+
+    final moviesEither = tabActions[event.currentTabIndex];
+
+    moviesEither.fold(
+      (l) => emit(
+        MovieTabLoadError(
+          currentTabIndex: event.currentTabIndex,
+          message: l.message,
+          errorType: l.errorType,
+        ),
       ),
-      (movies) {
-        return MovieTabLoadSuccess(
+      (movies) => emit(
+        MovieTabLoadSuccess(
           currentTabIndex: event.currentTabIndex,
           movies: movies,
-        );
-      },
+        ),
+      ),
     );
-
-    emit(state);
   }
 }

@@ -1,6 +1,4 @@
-class Sizes {
-  const Sizes._();
-
+abstract class Sizes {
   static const double dimen_0 = 0;
   static const double dimen_1 = 1;
   static const double dimen_2 = 2;
@@ -32,6 +30,7 @@ class Sizes {
   static const double dimen_160 = 160;
   static const double dimen_200 = 200;
   static const double dimen_230 = 230;
+  static const double dimen_260 = 260;
   static const double dimen_300 = 300;
   static const double dimen_400 = 400;
 }

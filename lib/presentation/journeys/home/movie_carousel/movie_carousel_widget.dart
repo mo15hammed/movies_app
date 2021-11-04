@@ -5,7 +5,7 @@ import 'package:movies_app/presentation/widgets/movie_app_bar.dart';
 import 'package:movies_app/presentation/widgets/separator.dart';
 
 import 'movie_backdrop_widget.dart';
-import 'movie_data_widget.dart';
+import 'movie_title_widget.dart';
 
 class MovieCarouselWidget extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -30,7 +30,7 @@ class MovieCarouselWidget extends StatelessWidget {
               movies: movies,
               index: index,
             ),
-            const MovieDataWidget(),
+            const MovieTitleWidget(),
             const Separator(),
           ],
         ),

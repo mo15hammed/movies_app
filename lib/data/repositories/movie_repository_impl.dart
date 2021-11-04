@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
+import 'package:movies_app/data/models/credits_result_model.dart';
 import 'package:movies_app/data/models/movie_details_model.dart';
 import 'package:movies_app/data/models/movie_model.dart';
+import 'package:movies_app/data/models/videos_result_model.dart';
 import 'package:movies_app/domain/entities/app_error.dart';
-import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/domain/repositories/movie_repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -14,66 +15,62 @@ class MovieRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<AppError, List<MovieModel>>> getTrending() async {
-    try {
-      final movies = await remoteDataSource.getTrending();
-      return Right(movies);
-    } on SocketException catch (e) {
-      return Left(
-          AppError(errorType: AppErrorType.network, message: e.message));
-    } on Exception catch (e) {
-      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
-    }
+    return _catchExceptions<List<MovieModel>>(() async {
+      return await remoteDataSource.getTrending();
+    });
   }
 
   @override
-  Future<Either<AppError, List<MovieEntity>>> getPopular() async {
-    try {
-      final movies = await remoteDataSource.getPopular();
-      return Right(movies);
-    } on SocketException catch (e) {
-      return Left(
-          AppError(errorType: AppErrorType.network, message: e.message));
-    } on Exception catch (e) {
-      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
-    }
+  Future<Either<AppError, List<MovieModel>>> getPopular() async {
+    return _catchExceptions<List<MovieModel>>(() async {
+      return await remoteDataSource.getPopular();
+    });
   }
 
   @override
-  Future<Either<AppError, List<MovieEntity>>> getPlayingNow() async {
-    try {
-      final movies = await remoteDataSource.getPlayingNow();
-      return Right(movies);
-    } on SocketException catch (e) {
-      return Left(
-          AppError(errorType: AppErrorType.network, message: e.message));
-    } on Exception catch (e) {
-      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
-    }
+  Future<Either<AppError, List<MovieModel>>> getPlayingNow() async {
+    return _catchExceptions<List<MovieModel>>(() async {
+      return await remoteDataSource.getPlayingNow();
+    });
   }
 
   @override
-  Future<Either<AppError, List<MovieEntity>>> getComingSoon() async {
-    try {
-      final movies = await remoteDataSource.getComingSoon();
-      return Right(movies);
-    } on SocketException catch (e) {
-      return Left(
-          AppError(errorType: AppErrorType.network, message: e.message));
-    } on Exception catch (e) {
-      return Left(AppError(errorType: AppErrorType.api, message: e.toString()));
-    }
+  Future<Either<AppError, List<MovieModel>>> getComingSoon() async {
+    return _catchExceptions<List<MovieModel>>(() async {
+      return await remoteDataSource.getComingSoon();
+    });
   }
 
   @override
   Future<Either<AppError, MovieDetailsModel>> getMovieDetails(int id) async {
+    return _catchExceptions<MovieDetailsModel>(() async {
+      return await remoteDataSource.getMovieDetails(id);
+    });
+  }
+
+  @override
+  Future<Either<AppError, List<CastModel>>> getMovieCast(int id) async {
+    return _catchExceptions<List<CastModel>>(() async {
+      return await remoteDataSource.getMovieCast(id);
+    });
+  }
+
+  @override
+  Future<Either<AppError, List<VideoModel>>> getMovieVideos(int id) async {
+    return _catchExceptions<List<VideoModel>>(() async {
+      return await remoteDataSource.getMovieVideos(id);
+    });
+  }
+
+  Future<Either<AppError, Type>> _catchExceptions<Type>(
+    Future<Type> Function() func,
+  ) async {
     try {
-      final movie = await remoteDataSource.getMovieDetails(id);
-      return Right(movie);
+      return Right(await func());
     } on SocketException catch (e) {
-      return Left(
-          AppError(message: e.message, errorType: AppErrorType.network));
+      return Left(AppError(e.message, AppErrorType.network));
     } on Exception catch (e) {
-      return Left(AppError(message: e.toString(), errorType: AppErrorType.api));
+      return Left(AppError(e.toString(), AppErrorType.api));
     }
   }
 }

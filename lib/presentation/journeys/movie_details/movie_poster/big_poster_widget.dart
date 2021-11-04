@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:movies_app/common/extensions/num_extension.dart';
-
 import 'movie_details_app_bar.dart';
 
 class BigPosterWidget extends StatelessWidget {
@@ -19,9 +20,6 @@ class BigPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Stack(
       alignment: AlignmentDirectional.bottomStart,
       children: [
@@ -47,8 +45,9 @@ class BigPosterWidget extends StatelessWidget {
           child: const MovieDetailAppBar(),
         ),
         ListTile(
+          dense: true,
           title: Text(
-            movie.title ?? '',
+            (movie.title ?? ''),
             style: Theme.of(context).textTheme.headline5,
           ),
           subtitle: Text(
@@ -57,7 +56,7 @@ class BigPosterWidget extends StatelessWidget {
           ),
           trailing: Text(
             movie.voteAverage?.percentage ?? '',
-            style: Theme.of(context).textTheme.violetHeadline6,
+            style: Theme.of(context).textTheme.royalBlueHeadline6,
           ),
         ),
       ],
