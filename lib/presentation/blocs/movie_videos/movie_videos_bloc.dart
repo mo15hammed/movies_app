@@ -25,7 +25,12 @@ class MovieVideosBloc extends Bloc<MovieVideosEvent, MovieVideosState> {
 
     castEither.fold(
       (l) => emit(MovieVideosLoadError(l.message, l.errorType)),
-      (videos) => emit(MovieVideosLoadSuccess(videos)),
+      (videos) {
+        if (videos.isEmpty) {
+        } else {
+          emit(MovieVideosLoadSuccess(videos));
+        }
+      },
     );
   }
 }

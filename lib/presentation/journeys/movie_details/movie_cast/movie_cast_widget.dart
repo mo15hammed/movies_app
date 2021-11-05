@@ -1,11 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/app_error_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/presentation/themes/theme_text.dart';
 
 import '../movie_cast/cast_item_widget.dart';
 
@@ -17,16 +15,15 @@ class MovieCastWidget extends StatelessWidget {
     return BlocBuilder<MovieCastBloc, MovieCastState>(
         builder: (context, state) {
       if (state is MovieCastLoadSuccess) {
-        print(state.cast.length);
         return SizedBox(
           height: Sizes.dimen_260.h,
           child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(
               horizontal: Sizes.dimen_16.w,
               vertical: Sizes.dimen_8.h,
             ),
             scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
             itemCount: state.cast.length,
             itemBuilder: (context, index) {
               final castItem = state.cast[index];
@@ -42,7 +39,11 @@ class MovieCastWidget extends StatelessWidget {
         return AppErrorWidget(
           message: state.message,
           errorType: state.errorType,
-          onRetryPressed: () {},
+          onRetryPressed: () {
+            context
+                .read<MovieCastBloc>()
+                .add(LoadMovieCastEvent(state.movieId));
+          },
         );
       }
       return const SizedBox.shrink();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:movies_app/presentation/themes/app_colors.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -6,7 +7,6 @@ import 'package:movies_app/presentation/wiredash_app.dart';
 import 'journeys/home/home_screen.dart';
 
 class MovieApp extends StatefulWidget {
-
   const MovieApp({Key? key}) : super(key: key);
 
   @override
@@ -35,7 +35,14 @@ class _MovieAppState extends State<MovieApp> {
           ),
           scaffoldBackgroundColor: AppColors.vulcan,
           textTheme: ThemeText.textTheme,
-          appBarTheme: const AppBarTheme(elevation: 0.0),
+          appBarTheme: const AppBarTheme(
+            elevation: 0.0,
+            color: Colors.transparent,
+
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+            ),
+          ),
         ),
         home: const HomeScreen(),
       ),

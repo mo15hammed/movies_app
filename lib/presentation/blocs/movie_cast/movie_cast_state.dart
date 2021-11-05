@@ -10,7 +10,6 @@ abstract class MovieCastState extends Equatable {
 class MovieCastInitial extends MovieCastState {}
 
 class MovieCastLoadSuccess extends MovieCastState {
-
   final List<CastEntity> cast;
 
   const MovieCastLoadSuccess(this.cast);
@@ -20,11 +19,16 @@ class MovieCastLoadSuccess extends MovieCastState {
 }
 
 class MovieCastLoadError extends MovieCastState {
+  final int movieId;
   final String message;
   final AppErrorType errorType;
 
-  const MovieCastLoadError(this.message, this.errorType);
+  const MovieCastLoadError({
+    required this.movieId,
+    required this.message,
+    required this.errorType,
+  });
 
   @override
-  List<Object> get props => [message, errorType];
+  List<Object> get props => [movieId, message, errorType];
 }

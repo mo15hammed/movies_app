@@ -35,7 +35,6 @@ class VideoModel extends VideoEntity {
   final String? site;
   final int? size;
   final bool? official;
-  final String? publishedAt;
   final String? id;
 
   const VideoModel({
@@ -44,7 +43,7 @@ class VideoModel extends VideoEntity {
     this.site,
     this.size,
     this.official,
-    this.publishedAt,
+    publishedAt,
     this.id,
     name,
     key,
@@ -53,6 +52,7 @@ class VideoModel extends VideoEntity {
           name: name,
           key: key,
           type: type,
+          publishedAt: publishedAt,
         );
 
   factory VideoModel.fromJson(dynamic json) {

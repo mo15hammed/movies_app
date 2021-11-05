@@ -6,19 +6,19 @@ import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_details/movie_details_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_videos/movie_videos_bloc.dart';
-import 'package:movies_app/presentation/journeys/movie_details/movie_details_arguments.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/presentation/journeys/movie_videos/movie_videos_screen.dart';
 import 'package:movies_app/presentation/widgets/button.dart';
 import 'movie_cast/movie_cast_widget.dart';
 import 'movie_poster/big_poster_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
-  final MovieDetailsArguments args;
+  final int movieId;
 
   const MovieDetailsScreen({
     Key? key,
-    required this.args,
+    required this.movieId,
   }) : super(key: key);
 
   @override
@@ -28,14 +28,11 @@ class MovieDetailsScreen extends StatelessWidget {
         providers: [
           BlocProvider<MovieDetailsBloc>(
             create: (context) => getItInstance<MovieDetailsBloc>()
-              ..add(MovieDetailsLoadEvent(args.id)),
+              ..add(MovieDetailsLoadEvent(movieId)),
           ),
           BlocProvider<MovieCastBloc>(
             create: (context) => getItInstance<MovieCastBloc>()
-              ..add(LoadMovieCastEvent(args.id)),
-          ),
-          BlocProvider<MovieVideosBloc>(
-            create: (context) => getItInstance<MovieVideosBloc>(),
+              ..add(LoadMovieCastEvent(movieId)),
           ),
         ],
         child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
@@ -73,7 +70,12 @@ class MovieDetailsScreen extends StatelessWidget {
                         text: LocaleKeys.watchTrailers.tr(),
                         expanded: true,
                         onPressed: () {
-                          context.read<MovieVideosBloc>().add(LoadMovieVideosEvent(args.id));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MovieVideosScreen(movieId: movieId),
+                            ),
+                          );
                         },
                       ),
                     ),

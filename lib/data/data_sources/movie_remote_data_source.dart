@@ -73,8 +73,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<VideoModel>> getMovieVideos(int id) async {
     final data = await _dioHelper.get('movie/$id/videos');
     final videos = VideosResultModel.fromJson(data).videos;
-    print('videos');
-    print(videos);
+    // print(videos);
     return videos ?? [];
   }
 

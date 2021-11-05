@@ -22,6 +22,7 @@ abstract class Sizes {
   static const double dimen_56 = 56;
   static const double dimen_60 = 60;
   static const double dimen_70 = 70;
+  static const double dimen_72 = 72;
   static const double dimen_80 = 80;
   static const double dimen_100 = 100;
   static const double dimen_110 = 110;

@@ -24,7 +24,11 @@ class MovieCastBloc extends Bloc<MovieCastEvent, MovieCastState> {
     final castEither = await getMovieCast(MovieParams(event.movieId));
 
     castEither.fold(
-      (l) => emit(MovieCastLoadError(l.message, l.errorType)),
+      (l) => emit(MovieCastLoadError(
+        movieId: event.movieId,
+        message: l.message,
+        errorType: l.errorType,
+      )),
       (cast) => emit(MovieCastLoadSuccess(cast)),
     );
   }
