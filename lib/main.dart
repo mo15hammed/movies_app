@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/domain/entities/language_entity.dart';
 import 'package:movies_app/presentation/blocs/debug/app_bloc_observer.dart';
 import 'package:movies_app/presentation/movie_app.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'di/get_it.dart' as get_it;
 
 Future<void> main() async {
@@ -15,6 +16,9 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   Bloc.observer = AppBlocObserver();
   await EasyLocalization.ensureInitialized();
+
+  await Hive.initFlutter();
+
   get_it.init();
 
   runApp(
@@ -22,7 +26,6 @@ Future<void> main() async {
       supportedLocales: LanguageEntity.locales,
       path: 'assets/translations',
       fallbackLocale: Locale(LanguageEntity.languages[0].code),
-      // startLocale: const Locale('ar'),
       child: ScreenUtilInit(
         designSize: const Size(414, 896),
         builder: () => const MovieApp(),

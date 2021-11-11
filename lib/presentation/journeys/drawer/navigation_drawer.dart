@@ -4,7 +4,7 @@ import 'package:movies_app/common/constants/locale_keys.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/domain/entities/language_entity.dart';
-import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/journeys/movie_favorite/favorite_screen.dart';
 import 'package:movies_app/presentation/widgets/app_dialog.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -57,7 +57,13 @@ class NavigationDrawer extends StatelessWidget {
                 children: [
                   NavigationListItem(
                     title: LocaleKeys.favMovies.tr(),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => FavoriteScreen(),
+                        ),
+                      );
+                    },
                   ),
                   NavigationExpandedListItem(
                     title: LocaleKeys.language.tr(),

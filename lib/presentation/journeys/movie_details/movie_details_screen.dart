@@ -5,7 +5,7 @@ import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_details/movie_details_bloc.dart';
-import 'package:movies_app/presentation/blocs/movie_videos/movie_videos_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_favorite/movie_favorite_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/presentation/journeys/movie_videos/movie_videos_screen.dart';
 import 'package:movies_app/presentation/widgets/button.dart';
@@ -34,8 +34,16 @@ class MovieDetailsScreen extends StatelessWidget {
             create: (context) => getItInstance<MovieCastBloc>()
               ..add(LoadMovieCastEvent(movieId)),
           ),
+          BlocProvider<MovieFavoriteBloc>(
+            create: (context) => getItInstance<MovieFavoriteBloc>(),
+          ),
         ],
-        child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+        child: BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
+          listener: (context, state) {
+            if (state is MovieDetailsSuccess) {
+              context.read<MovieFavoriteBloc>().add(CheckFavoriteMoviesEvent(state.movie.id));
+            }
+          },
           builder: (context, state) {
             if (state is MovieDetailsSuccess) {
               final movie = state.movie;

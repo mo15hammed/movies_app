@@ -17,7 +17,7 @@ class MovieSearchCardItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => MovieDetailsScreen(movieId: movie.id!),
+            builder: (context) => MovieDetailsScreen(movieId: movie.id),
           ),
         );
       },
@@ -30,7 +30,7 @@ class MovieSearchCardItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(Sizes.dimen_8.r),
                 child: CachedNetworkImage(
-                  imageUrl: movie.posterPath ?? '',
+                  imageUrl: movie.posterPath ,
                   placeholder: (_, __) => const SizedBox.shrink(),
                   errorWidget: (_, __, ___) => const SizedBox.shrink(),
                   fit: BoxFit.fitWidth,
@@ -46,7 +46,7 @@ class MovieSearchCardItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        movie.title ?? '',
+                        movie.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.subtitle1),

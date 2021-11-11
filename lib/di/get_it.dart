@@ -1,10 +1,14 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:movies_app/data/core/dio_helper.dart';
-import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
+import 'package:movies_app/data/data_sources/local/movie_local_data_source.dart';
+import 'package:movies_app/data/data_sources/remote/movie_remote_data_source.dart';
 import 'package:movies_app/data/repositories/movie_repository_impl.dart';
 import 'package:movies_app/domain/repositories/movie_repository.dart';
+import 'package:movies_app/domain/usecases/check_if_movie_is_favorite.dart';
+import 'package:movies_app/domain/usecases/delete_favorite_movie.dart';
 import 'package:movies_app/domain/usecases/get_coming_soon.dart';
+import 'package:movies_app/domain/usecases/get_favorite_movies.dart';
 import 'package:movies_app/domain/usecases/get_movie_cast.dart';
 import 'package:movies_app/domain/usecases/get_movie_details.dart';
 import 'package:movies_app/domain/usecases/get_movie_videos.dart';
@@ -12,11 +16,13 @@ import 'package:movies_app/domain/usecases/get_playing_now.dart';
 import 'package:movies_app/domain/usecases/get_popular.dart';
 import 'package:movies_app/domain/usecases/get_searched_movies.dart';
 import 'package:movies_app/domain/usecases/get_trending.dart';
+import 'package:movies_app/domain/usecases/save_favorite_movie.dart';
 import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_details/movie_details_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_favorite/movie_favorite_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_search/movie_search_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_videos/movie_videos_bloc.dart';
@@ -33,8 +39,14 @@ void init() {
   getItInstance.registerLazySingleton<MovieRemoteDataSource>(
     () => MovieRemoteDataSourceImpl(getItInstance()),
   );
+  getItInstance.registerLazySingleton<MovieLocalDataSource>(
+    () => MovieLocalDataSourceImpl(),
+  );
   getItInstance.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImpl(getItInstance()),
+    () => MovieRepositoryImpl(
+      remoteDataSource: getItInstance(),
+      localDataSource: getItInstance(),
+    ),
   );
 
   // use cases
@@ -62,8 +74,22 @@ void init() {
   getItInstance.registerLazySingleton<GetSearchedMovies>(
     () => GetSearchedMovies(getItInstance()),
   );
+  getItInstance.registerLazySingleton<GetFavoriteMovies>(
+    () => GetFavoriteMovies(getItInstance()),
+  );
+  getItInstance.registerLazySingleton<SaveFavoriteMovie>(
+    () => SaveFavoriteMovie(getItInstance()),
+  );
+  getItInstance.registerLazySingleton<DeleteFavoriteMovie>(
+    () => DeleteFavoriteMovie(getItInstance()),
+  );
+  getItInstance.registerLazySingleton<CheckIfMovieIsFavorite>(
+    () => CheckIfMovieIsFavorite(getItInstance()),
+  );
 
   // blocs
+  getItInstance.registerSingleton<LanguageBloc>(LanguageBloc());
+
   getItInstance.registerLazySingleton<MovieCarouselBloc>(
     () => MovieCarouselBloc(getItInstance()),
   );
@@ -77,7 +103,6 @@ void init() {
       getComingSoon: getItInstance(),
     ),
   );
-  getItInstance.registerSingleton<LanguageBloc>(LanguageBloc());
   getItInstance.registerFactory<MovieDetailsBloc>(
     () => MovieDetailsBloc(getItInstance()),
   );
@@ -89,5 +114,14 @@ void init() {
   );
   getItInstance.registerFactory<MovieSearchBloc>(
     () => MovieSearchBloc(getItInstance()),
+  );
+
+  getItInstance.registerFactory<MovieFavoriteBloc>(
+    () => MovieFavoriteBloc(
+      getFavoriteMovies: getItInstance(),
+      saveFavoriteMovie: getItInstance(),
+      deleteFavoriteMovie: getItInstance(),
+      checkIfMovieIsFavorite: getItInstance(),
+    ),
   );
 }

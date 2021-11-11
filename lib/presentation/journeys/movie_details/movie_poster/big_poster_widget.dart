@@ -34,7 +34,7 @@ class BigPosterWidget extends StatelessWidget {
             ],
           )),
           child: CachedNetworkImage(
-            imageUrl: movie.posterPath ?? '',
+            imageUrl: movie.posterPath,
             width: 1.sw,
           ),
         ),
@@ -42,12 +42,12 @@ class BigPosterWidget extends StatelessWidget {
           top: ScreenUtil().statusBarHeight + Sizes.dimen_4.h,
           left: Sizes.dimen_16,
           right: Sizes.dimen_16,
-          child: const MovieDetailAppBar(),
+          child: MovieDetailAppBar(movie: movie),
         ),
         ListTile(
           dense: true,
           title: Text(
-            (movie.title ?? ''),
+            movie.title,
             style: Theme.of(context).textTheme.headline5,
           ),
           subtitle: Text(

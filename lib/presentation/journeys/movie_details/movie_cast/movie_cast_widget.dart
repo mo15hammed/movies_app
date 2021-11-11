@@ -12,12 +12,12 @@ class MovieCastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieCastBloc, MovieCastState>(
-        builder: (context, state) {
-      if (state is MovieCastLoadSuccess) {
-        return SizedBox(
-          height: Sizes.dimen_260.h,
-          child: ListView.separated(
+    return SizedBox(
+      height: Sizes.dimen_260.h,
+      child: BlocBuilder<MovieCastBloc, MovieCastState>(
+          builder: (context, state) {
+        if (state is MovieCastLoadSuccess) {
+          return ListView.separated(
             physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(
               horizontal: Sizes.dimen_16.w,
@@ -32,21 +32,21 @@ class MovieCastWidget extends StatelessWidget {
             separatorBuilder: (context, index) {
               return const SizedBox(width: Sizes.dimen_8);
             },
-          ),
-        );
-      }
-      if (state is MovieCastLoadError) {
-        return AppErrorWidget(
-          message: state.message,
-          errorType: state.errorType,
-          onRetryPressed: () {
-            context
-                .read<MovieCastBloc>()
-                .add(LoadMovieCastEvent(state.movieId));
-          },
-        );
-      }
-      return const SizedBox.shrink();
-    });
+          );
+        }
+        if (state is MovieCastLoadError) {
+          return AppErrorWidget(
+            message: state.message,
+            errorType: state.errorType,
+            onRetryPressed: () {
+              context
+                  .read<MovieCastBloc>()
+                  .add(LoadMovieCastEvent(state.movieId));
+            },
+          );
+        }
+        return const SizedBox.shrink();
+      }),
+    );
   }
 }

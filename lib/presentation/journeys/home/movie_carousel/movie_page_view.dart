@@ -62,8 +62,8 @@ class _MoviePageViewState extends State<MoviePageView> {
             return AnimatedMovieCardWidget(
               index: i,
               pageController: _pageController,
-              movieId: movie.id!,
-              posterPath: movie.posterPath ?? '',
+              movieId: movie.id,
+              posterPath: movie.posterPath,
             );
           },
           onPageChanged: (index) {

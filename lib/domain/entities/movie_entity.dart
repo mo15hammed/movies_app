@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class MovieEntity extends Equatable {
-  final String? posterPath;
-  final int? id;
+  final String posterPath;
+  final int id;
   final String? backdropPath;
-  final String? title;
+  final String title;
   final num? voteAverage;
   final String? releaseDate;
   final String? overview;
@@ -17,7 +17,7 @@ class MovieEntity extends Equatable {
     required this.voteAverage,
     required this.releaseDate,
     required this.overview,
-  }) : assert(id != null, 'Movie id cannot be null');
+  });
 
   @override
   List<Object?> get props => [id, title];
