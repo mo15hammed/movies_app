@@ -19,19 +19,22 @@ class MovieCardWidget extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       elevation: Sizes.dimen_32,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => MovieDetailsScreen(movieId: movieId),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => MovieDetailsScreen(movieId: movieId),
+              ),
+            );
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(Sizes.dimen_16.r),
+            child: CachedNetworkImage(
+              imageUrl: posterPath,
+              fit: BoxFit.cover,
             ),
-          );
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(Sizes.dimen_16.r),
-          child: CachedNetworkImage(
-            imageUrl: posterPath,
-            fit: BoxFit.cover,
           ),
         ),
       ),

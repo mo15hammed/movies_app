@@ -12,4 +12,5 @@ abstract class MovieRepository {
   Future<Either<AppError, MovieEntity>> getMovieDetails(int id);
   Future<Either<AppError, List<CastEntity>>> getMovieCast(int id);
   Future<Either<AppError, List<VideoEntity>>> getMovieVideos(int id);
+  Future<Either<AppError, List<MovieEntity>>> getSearchedMovies(String query);
 }

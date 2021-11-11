@@ -62,6 +62,13 @@ class MovieRepositoryImpl extends MovieRepository {
     });
   }
 
+  @override
+  Future<Either<AppError, List<MovieModel>>> getSearchedMovies(String query) async {
+    return _catchExceptions<List<MovieModel>>(() async {
+      return await remoteDataSource.getSearchedMovies(query);
+    });
+  }
+
   Future<Either<AppError, Type>> _catchExceptions<Type>(
     Future<Type> Function() func,
   ) async {

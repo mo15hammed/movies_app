@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_search/movie_search_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
@@ -27,32 +28,34 @@ class HomeScreen extends StatelessWidget {
           create: (_) =>
               getItInstance<MovieTabsBloc>()..add(const MovieTabChangedEvent()),
         ),
+        BlocProvider<MovieSearchBloc>(
+          create: (_) => getItInstance<MovieSearchBloc>(),
+        ),
       ],
       child: Scaffold(
         drawer: const NavigationDrawer(),
         body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
           builder: (context, state) {
             if (state is MovieCarouselLoaded) {
-              return Stack(
-                fit: StackFit.expand,
-                children: [
-                  FractionallySizedBox(
-                    alignment: Alignment.topCenter,
-                    heightFactor: 0.6,
-                    child: MovieCarouselWidget(
-                      movies: state.movies,
-                      index: state.defaultIndex,
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: MovieCarouselWidget(
+                        movies: state.movies,
+                        index: state.defaultIndex,
+                      ),
                     ),
-                  ),
-                  const FractionallySizedBox(
-                    alignment: Alignment.bottomCenter,
-                    heightFactor: 0.4,
-                    child: MovieTabBarWidget(),
-                  ),
-                ],
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: const MovieTabBarWidget(),
+                    ),
+                  ],
+                ),
               );
-            }
-            else if (state is MovieCarouselError) {
+            } else if (state is MovieCarouselError) {
               return AppErrorWidget(
                 message: state.message,
                 errorType: state.errorType,

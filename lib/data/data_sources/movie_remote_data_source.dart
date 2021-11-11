@@ -14,6 +14,7 @@ abstract class MovieRemoteDataSource {
   Future<MovieDetailsModel> getMovieDetails(int id);
   Future<List<CastModel>> getMovieCast(int id);
   Future<List<VideoModel>> getMovieVideos(int id);
+  Future<List<MovieModel>> getSearchedMovies(String query);
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
@@ -77,4 +78,16 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     return videos ?? [];
   }
 
+  @override
+  Future<List<MovieModel>> getSearchedMovies(String query) async {
+    final data = await _dioHelper.get(
+      ApiConstants.search,
+      queryParams: {
+        'query': query,
+      },
+    );
+    final movies = MoviesResultModel.fromJson(data).movies;
+    // print(movies);
+    return movies ?? [];
+  }
 }

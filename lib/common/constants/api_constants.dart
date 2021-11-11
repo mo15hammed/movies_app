@@ -9,5 +9,6 @@ abstract class ApiConstants {
   static const String popular = 'movie/popular';
   static const String nowPlaying = 'movie/now_playing';
   static const String upcoming = 'movie/upcoming';
+  static const String search = 'search/movie';
 
 }

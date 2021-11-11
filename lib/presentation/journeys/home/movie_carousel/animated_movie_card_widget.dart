@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/common/constants/size_constants.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'movie_card_widget.dart';
 
 class AnimatedMovieCardWidget extends StatelessWidget {
@@ -27,14 +24,13 @@ class AnimatedMovieCardWidget extends StatelessWidget {
         if (pageController.position.haveDimensions) {
           value = pageController.page! - index;
         }
-        value = (1 - (value.abs() * 0.1)).clamp(0.0, 1.0);
-        return Align(
+        value = (1 - (value.abs() * 0.12)).clamp(0.0, 1.0);
+
+        return Transform.scale(
+          scale: value,
+          filterQuality: FilterQuality.high,
           alignment: Alignment.topCenter,
-          child: SizedBox(
-            height: Curves.easeIn.transform(value) * 0.40.sh,
-            width: Curves.easeIn.transform(value) * Sizes.dimen_230,
-            child: child,
-          ),
+          child: child,
         );
       },
       child: MovieCardWidget(

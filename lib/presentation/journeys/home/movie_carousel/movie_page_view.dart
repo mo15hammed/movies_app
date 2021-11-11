@@ -47,30 +47,31 @@ class _MoviePageViewState extends State<MoviePageView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: Sizes.dimen_10.h),
-      height: 0.40.sh,
-      clipBehavior: Clip.none,
-      child: PageView.builder(
-        controller: _pageController,
-        physics: const BouncingScrollPhysics(),
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: Sizes.dimen_10.h),
         clipBehavior: Clip.none,
-        pageSnapping: true,
-        itemCount: widget.movies.length,
-        itemBuilder: (_, i) {
-          final movie = widget.movies[i];
-          return AnimatedMovieCardWidget(
-            index: i,
-            pageController: _pageController,
-            movieId: movie.id!,
-            posterPath: movie.posterPath ?? '',
-          );
-        },
-        onPageChanged: (index) {
-          context
-              .read<MovieBackdropBloc>()
-              .add(MovieBackdropChangedEvent(widget.movies[index]));
-        },
+        child: PageView.builder(
+          controller: _pageController,
+          physics: const BouncingScrollPhysics(),
+          clipBehavior: Clip.none,
+          pageSnapping: true,
+          itemCount: widget.movies.length,
+          itemBuilder: (_, i) {
+            final movie = widget.movies[i];
+            return AnimatedMovieCardWidget(
+              index: i,
+              pageController: _pageController,
+              movieId: movie.id!,
+              posterPath: movie.posterPath ?? '',
+            );
+          },
+          onPageChanged: (index) {
+            context
+                .read<MovieBackdropBloc>()
+                .add(MovieBackdropChangedEvent(widget.movies[index]));
+          },
+        ),
       ),
     );
   }
