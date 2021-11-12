@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/presentation/journeys/movie_details/movie_details_screen.dart';
+import 'package:movies_app/presentation/routing/app_router.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 
 class MovieSearchCardItem extends StatelessWidget {
@@ -15,10 +15,9 @@ class MovieSearchCardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => MovieDetailsScreen(movieId: movie.id),
-          ),
+        Navigator.of(context).pushNamed(
+          AppRouter.details,
+          arguments: movie.id,
         );
       },
       child: SizedBox(

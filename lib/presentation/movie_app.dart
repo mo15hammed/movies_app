@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movies_app/presentation/routing/app_router.dart';
 import 'package:movies_app/presentation/themes/app_colors.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:movies_app/presentation/wiredash_app.dart';
-import 'journeys/home/home_screen.dart';
 
 class MovieApp extends StatefulWidget {
   const MovieApp({Key? key}) : super(key: key);
@@ -44,7 +44,8 @@ class _MovieAppState extends State<MovieApp> {
             ),
           ),
         ),
-        home: const HomeScreen(),
+        // initialRoute: AppRouter.initial,
+        onGenerateRoute: AppRouter.generateRoute,
       ),
     );
   }

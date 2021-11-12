@@ -21,7 +21,7 @@ class MovieVideoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
         height: Sizes.dimen_120.h,
         // padding: EdgeInsets.symmetric(vertical: Sizes.dimen_4.h),
         child: Row(

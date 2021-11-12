@@ -5,7 +5,7 @@ import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_favorite/movie_favorite_bloc.dart';
-import 'package:movies_app/presentation/journeys/movie_details/movie_details_screen.dart';
+import 'package:movies_app/presentation/routing/app_router.dart';
 
 class FavoriteMovieCard extends StatelessWidget {
   final MovieEntity movie;
@@ -19,10 +19,9 @@ class FavoriteMovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => MovieDetailsScreen(movieId: movie.id),
-          ),
+        Navigator.of(context).pushNamed(
+          AppRouter.details,
+          arguments: movie.id,
         );
       },
       child: ClipRRect(

@@ -17,7 +17,6 @@ import 'package:movies_app/domain/usecases/get_popular.dart';
 import 'package:movies_app/domain/usecases/get_searched_movies.dart';
 import 'package:movies_app/domain/usecases/get_trending.dart';
 import 'package:movies_app/domain/usecases/save_favorite_movie.dart';
-import 'package:movies_app/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
@@ -88,8 +87,6 @@ void init() {
   );
 
   // blocs
-  getItInstance.registerSingleton<LanguageBloc>(LanguageBloc());
-
   getItInstance.registerLazySingleton<MovieCarouselBloc>(
     () => MovieCarouselBloc(getItInstance()),
   );

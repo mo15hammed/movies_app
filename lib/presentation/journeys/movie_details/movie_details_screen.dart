@@ -7,7 +7,7 @@ import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_details/movie_details_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_favorite/movie_favorite_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/presentation/journeys/movie_videos/movie_videos_screen.dart';
+import 'package:movies_app/presentation/routing/app_router.dart';
 import 'package:movies_app/presentation/widgets/button.dart';
 import 'movie_cast/movie_cast_widget.dart';
 import 'movie_poster/big_poster_widget.dart';
@@ -78,11 +78,9 @@ class MovieDetailsScreen extends StatelessWidget {
                         text: LocaleKeys.watchTrailers.tr(),
                         expanded: true,
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  MovieVideosScreen(movieId: movieId),
-                            ),
+                          Navigator.of(context).pushNamed(
+                            AppRouter.videos,
+                            arguments: movieId,
                           );
                         },
                       ),
