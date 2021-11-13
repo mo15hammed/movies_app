@@ -17,6 +17,7 @@ import 'package:movies_app/domain/usecases/get_popular.dart';
 import 'package:movies_app/domain/usecases/get_searched_movies.dart';
 import 'package:movies_app/domain/usecases/get_trending.dart';
 import 'package:movies_app/domain/usecases/save_favorite_movie.dart';
+import 'package:movies_app/presentation/blocs/loading/loading_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
@@ -49,6 +50,8 @@ void init() {
   );
 
   // use cases
+  getItInstance.registerSingleton<LoadingBloc>(LoadingBloc());
+
   getItInstance.registerLazySingleton<GetTrending>(
     () => GetTrending(getItInstance()),
   );
@@ -88,7 +91,10 @@ void init() {
 
   // blocs
   getItInstance.registerLazySingleton<MovieCarouselBloc>(
-    () => MovieCarouselBloc(getItInstance()),
+    () => MovieCarouselBloc(
+      getTrending: getItInstance(),
+      loadingBloc: getItInstance(),
+    ),
   );
   getItInstance.registerLazySingleton<MovieBackdropBloc>(
     () => MovieBackdropBloc(),
@@ -101,7 +107,10 @@ void init() {
     ),
   );
   getItInstance.registerFactory<MovieDetailsBloc>(
-    () => MovieDetailsBloc(getItInstance()),
+    () => MovieDetailsBloc(
+      getMovieDetails: getItInstance(),
+      loadingBloc: getItInstance(),
+    ),
   );
   getItInstance.registerFactory<MovieCastBloc>(
     () => MovieCastBloc(getItInstance()),
@@ -110,7 +119,10 @@ void init() {
     () => MovieVideosBloc(getItInstance()),
   );
   getItInstance.registerFactory<MovieSearchBloc>(
-    () => MovieSearchBloc(getItInstance()),
+    () => MovieSearchBloc(
+      loadingBloc: getItInstance(),
+      getSearchedMovies: getItInstance(),
+    ),
   );
 
   getItInstance.registerFactory<MovieFavoriteBloc>(

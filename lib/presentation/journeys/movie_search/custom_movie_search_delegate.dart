@@ -56,14 +56,11 @@ class CustomMovieSearchDelegate extends SearchDelegate {
 
   @override
   void showResults(BuildContext context) {
-    print('2222222222222222222222222222222');
     super.showResults(context);
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    print('11111111111111111111111111');
-    // if (query.isEmpty) return const SizedBox.shrink();
     if (query.isNotEmpty) {
       bloc.add(SearchQueryChangedEvent(query));
     }

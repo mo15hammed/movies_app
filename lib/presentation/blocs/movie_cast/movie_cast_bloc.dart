@@ -21,6 +21,7 @@ class MovieCastBloc extends Bloc<MovieCastEvent, MovieCastState> {
     LoadMovieCastEvent event,
     Emitter<MovieCastState> emit,
   ) async {
+    emit(MovieCastLoading());
     final castEither = await getMovieCast(MovieParams(event.movieId));
 
     castEither.fold(

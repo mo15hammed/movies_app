@@ -8,6 +8,7 @@ abstract class MovieCastState extends Equatable {
 }
 
 class MovieCastInitial extends MovieCastState {}
+class MovieCastLoading extends MovieCastState {}
 
 class MovieCastLoadSuccess extends MovieCastState {
   final List<CastEntity> cast;

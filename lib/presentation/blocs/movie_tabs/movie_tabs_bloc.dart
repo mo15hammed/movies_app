@@ -27,12 +27,7 @@ class MovieTabsBloc extends Bloc<MovieTabsEvent, MovieTabsState> {
     MovieTabChangedEvent event,
     Emitter<MovieTabsState> emit,
   ) async {
-    emit(
-      MovieTabLoadSuccess(
-        currentTabIndex: event.currentTabIndex,
-        movies: const [],
-      ),
-    );
+    emit(MovieTabLoading(currentTabIndex: event.currentTabIndex));
 
     final tabActions = [
       await getPopular(NoParams()),

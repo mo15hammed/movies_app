@@ -11,6 +11,10 @@ abstract class MovieTabsState extends Equatable {
 
 class MovieTabsInitial extends MovieTabsState {}
 
+class MovieTabLoading extends MovieTabsState {
+  const MovieTabLoading({required int currentTabIndex}): super(currentTabIndex: currentTabIndex);
+}
+
 class MovieTabLoadSuccess extends MovieTabsState {
   final List<MovieEntity> movies;
 

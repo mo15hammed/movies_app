@@ -8,6 +8,7 @@ import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_entity.dart
 import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_item_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:movies_app/presentation/journeys/loading/loading_widget.dart';
 
 class MovieTabBarWidget extends StatelessWidget {
   const MovieTabBarWidget({
@@ -39,21 +40,23 @@ class MovieTabBarWidget extends StatelessWidget {
                   );
                 }).toList(),
               ),
+              if (state is MovieTabLoading)
+                Expanded(
+                  child: LoadingWidget(size: Sizes.dimen_200.w),
+                ),
               if (state is MovieTabLoadSuccess)
                 Expanded(
                   child: MovieListViewBuilder(movies: state.movies),
                 ),
               if (state is MovieTabLoadError)
-                Expanded(
-                  child: AppErrorWidget(
-                    message: state.message,
-                    errorType: state.errorType,
-                    onRetryPressed: () {
-                      context.read<MovieTabsBloc>().add(MovieTabChangedEvent(
-                            currentTabIndex: state.currentTabIndex,
-                          ));
-                    },
-                  ),
+                AppErrorWidget(
+                  message: state.message,
+                  errorType: state.errorType,
+                  onRetryPressed: () {
+                    context.read<MovieTabsBloc>().add(MovieTabChangedEvent(
+                          currentTabIndex: state.currentTabIndex,
+                        ));
+                  },
                 ),
             ],
           ),
