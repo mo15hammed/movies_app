@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
-import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_cubit.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/app_error_widget.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/movie_list_view_builder.dart';
 import 'package:movies_app/presentation/journeys/home/movie_tabs/tab_entity.dart';
@@ -16,14 +16,12 @@ class MovieTabBarWidget extends StatelessWidget {
   }) : super(key: key);
 
   void _onTabTapped(BuildContext context, int index) {
-    context
-        .read<MovieTabsBloc>()
-        .add(MovieTabChangedEvent(currentTabIndex: index));
+    context.read<MovieTabsCubit>().changeTab(index: index);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieTabsBloc, MovieTabsState>(
+    return BlocBuilder<MovieTabsCubit, MovieTabsState>(
       builder: (context, state) {
         return Padding(
           key: ValueKey('${context.locale}'),
@@ -53,9 +51,9 @@ class MovieTabBarWidget extends StatelessWidget {
                   message: state.message,
                   errorType: state.errorType,
                   onRetryPressed: () {
-                    context.read<MovieTabsBloc>().add(MovieTabChangedEvent(
-                          currentTabIndex: state.currentTabIndex,
-                        ));
+                    context
+                        .read<MovieTabsCubit>()
+                        .changeTab(index: state.currentTabIndex);
                   },
                 ),
             ],

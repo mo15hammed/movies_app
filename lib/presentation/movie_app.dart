@@ -9,7 +9,8 @@ import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:movies_app/presentation/wiredash_app.dart';
 
-import 'blocs/loading/loading_bloc.dart';
+import 'blocs/loading/loading_cubit.dart';
+import 'blocs/theme/theme_cubit.dart';
 
 class MovieApp extends StatefulWidget {
   const MovieApp({Key? key}) : super(key: key);
@@ -23,8 +24,15 @@ class _MovieAppState extends State<MovieApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LoadingBloc>(
-      create: (context) => getItInstance(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LoadingCubit>(
+          create: (context) => getItInstance(),
+        ),
+        BlocProvider<ThemeCubit>(
+          create: (context) => ThemeCubit(),
+        ),
+      ],
       child: WiredashApp(
         navigatorKey: _navigatorKey,
         child: MaterialApp(

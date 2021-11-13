@@ -1,4 +1,4 @@
-part of 'movie_carousel_bloc.dart';
+part of 'movie_carousel_cubit.dart';
 
 abstract class MovieCarouselState extends Equatable {
   const MovieCarouselState();
@@ -21,11 +21,11 @@ class MovieCarouselError extends MovieCarouselState {
   List<Object> get props => [errorType, message];
 }
 
-class MovieCarouselLoaded extends MovieCarouselState {
+class MovieCarouselLoadSuccess extends MovieCarouselState {
   final List<MovieEntity> movies;
   final int defaultIndex;
 
-  const MovieCarouselLoaded({
+  const MovieCarouselLoadSuccess({
     required this.movies,
     this.defaultIndex = 0,
   }) : assert(defaultIndex >= 0, 'defaultIndex cannot be less than 0');

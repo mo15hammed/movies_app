@@ -17,14 +17,14 @@ import 'package:movies_app/domain/usecases/get_popular.dart';
 import 'package:movies_app/domain/usecases/get_searched_movies.dart';
 import 'package:movies_app/domain/usecases/get_trending.dart';
 import 'package:movies_app/domain/usecases/save_favorite_movie.dart';
-import 'package:movies_app/presentation/blocs/loading/loading_bloc.dart';
-import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
-import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
+import 'package:movies_app/presentation/blocs/loading/loading_cubit.dart';
+import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_cubit.dart';
+import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_cubit.dart';
 import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_details/movie_details_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_favorite/movie_favorite_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_search/movie_search_bloc.dart';
-import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_cubit.dart';
 import 'package:movies_app/presentation/blocs/movie_videos/movie_videos_bloc.dart';
 
 final getItInstance = GetIt.I;
@@ -50,7 +50,7 @@ void init() {
   );
 
   // use cases
-  getItInstance.registerSingleton<LoadingBloc>(LoadingBloc());
+  getItInstance.registerSingleton<LoadingCubit>(LoadingCubit());
 
   getItInstance.registerLazySingleton<GetTrending>(
     () => GetTrending(getItInstance()),
@@ -90,17 +90,17 @@ void init() {
   );
 
   // blocs
-  getItInstance.registerLazySingleton<MovieCarouselBloc>(
-    () => MovieCarouselBloc(
+  getItInstance.registerLazySingleton<MovieCarouselCubit>(
+    () => MovieCarouselCubit(
       getTrending: getItInstance(),
-      loadingBloc: getItInstance(),
+      loadingCubit: getItInstance(),
     ),
   );
-  getItInstance.registerLazySingleton<MovieBackdropBloc>(
-    () => MovieBackdropBloc(),
+  getItInstance.registerLazySingleton<MovieBackdropCubit>(
+    () => MovieBackdropCubit(),
   );
-  getItInstance.registerLazySingleton<MovieTabsBloc>(
-    () => MovieTabsBloc(
+  getItInstance.registerLazySingleton<MovieTabsCubit>(
+    () => MovieTabsCubit(
       getPopular: getItInstance(),
       getPlayingNow: getItInstance(),
       getComingSoon: getItInstance(),
@@ -109,7 +109,7 @@ void init() {
   getItInstance.registerFactory<MovieDetailsBloc>(
     () => MovieDetailsBloc(
       getMovieDetails: getItInstance(),
-      loadingBloc: getItInstance(),
+      loadingCubit: getItInstance(),
     ),
   );
   getItInstance.registerFactory<MovieCastBloc>(
@@ -120,7 +120,7 @@ void init() {
   );
   getItInstance.registerFactory<MovieSearchBloc>(
     () => MovieSearchBloc(
-      loadingBloc: getItInstance(),
+      loadingCubit: getItInstance(),
       getSearchedMovies: getItInstance(),
     ),
   );

@@ -7,27 +7,21 @@ import 'package:movies_app/domain/usecases/get_coming_soon.dart';
 import 'package:movies_app/domain/usecases/get_playing_now.dart';
 import 'package:movies_app/domain/usecases/get_popular.dart';
 
-part 'movie_tabs_event.dart';
 part 'movie_tabs_state.dart';
 
-class MovieTabsBloc extends Bloc<MovieTabsEvent, MovieTabsState> {
+class MovieTabsCubit extends Cubit<MovieTabsState> {
   final GetPopular getPopular;
   final GetPlayingNow getPlayingNow;
   final GetComingSoon getComingSoon;
 
-  MovieTabsBloc({
+  MovieTabsCubit({
     required this.getPopular,
     required this.getPlayingNow,
     required this.getComingSoon,
-  }) : super(MovieTabsInitial()) {
-    on<MovieTabChangedEvent>(_onTabChanged);
-  }
+  }) : super(MovieTabsInitial());
 
-  _onTabChanged(
-    MovieTabChangedEvent event,
-    Emitter<MovieTabsState> emit,
-  ) async {
-    emit(MovieTabLoading(currentTabIndex: event.currentTabIndex));
+  void changeTab({index = 0}) async {
+    emit(MovieTabLoading(currentTabIndex: index));
 
     final tabActions = [
       await getPopular(NoParams()),
@@ -35,19 +29,19 @@ class MovieTabsBloc extends Bloc<MovieTabsEvent, MovieTabsState> {
       await getComingSoon(NoParams()),
     ];
 
-    final moviesEither = tabActions[event.currentTabIndex];
+    final moviesEither = tabActions[index];
 
     moviesEither.fold(
-      (l) => emit(
+          (l) => emit(
         MovieTabLoadError(
-          currentTabIndex: event.currentTabIndex,
+          currentTabIndex: index,
           message: l.message,
           errorType: l.errorType,
         ),
       ),
-      (movies) => emit(
+          (movies) => emit(
         MovieTabLoadSuccess(
-          currentTabIndex: event.currentTabIndex,
+          currentTabIndex: index,
           movies: movies,
         ),
       ),

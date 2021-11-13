@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/di/get_it.dart';
-import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
-import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_cubit.dart';
+import 'package:movies_app/presentation/blocs/movie_carousel/movie_carousel_cubit.dart';
 import 'package:movies_app/presentation/blocs/movie_search/movie_search_bloc.dart';
-import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_bloc.dart';
+import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_cubit.dart';
 import 'package:movies_app/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
 import 'movie_carousel/app_error_widget.dart';
@@ -17,16 +17,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<MovieCarouselBloc>(
-          create: (_) => getItInstance<MovieCarouselBloc>()
-            ..add(const MovieCarouselLoadEvent()),
+        BlocProvider<MovieCarouselCubit>(
+          create: (_) => getItInstance<MovieCarouselCubit>()..loadCarousel(),
         ),
-        BlocProvider<MovieBackdropBloc>(
-          create: (_) => getItInstance<MovieBackdropBloc>(),
+        BlocProvider<MovieBackdropCubit>(
+          create: (_) => getItInstance<MovieBackdropCubit>(),
         ),
-        BlocProvider<MovieTabsBloc>(
+        BlocProvider<MovieTabsCubit>(
           create: (_) =>
-              getItInstance<MovieTabsBloc>()..add(const MovieTabChangedEvent()),
+              getItInstance<MovieTabsCubit>()..changeTab(),
         ),
         BlocProvider<MovieSearchBloc>(
           create: (_) => getItInstance<MovieSearchBloc>(),
@@ -34,9 +33,9 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Scaffold(
         drawer: const NavigationDrawer(),
-        body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
+        body: BlocBuilder<MovieCarouselCubit, MovieCarouselState>(
           builder: (context, state) {
-            if (state is MovieCarouselLoaded) {
+            if (state is MovieCarouselLoadSuccess) {
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
@@ -59,9 +58,8 @@ class HomeScreen extends StatelessWidget {
               return AppErrorWidget(
                 message: state.message,
                 errorType: state.errorType,
-                onRetryPressed: () => context
-                    .read<MovieCarouselBloc>()
-                    .add(const MovieCarouselLoadEvent()),
+                onRetryPressed: () =>
+                    context.read<MovieCarouselCubit>().loadCarousel(),
               );
             }
             return const SizedBox.shrink();

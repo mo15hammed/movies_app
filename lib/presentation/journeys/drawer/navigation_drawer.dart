@@ -3,6 +3,7 @@ import 'package:movies_app/common/constants/locale_keys.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/domain/entities/language_entity.dart';
+import 'package:movies_app/presentation/journeys/drawer/toggle_theme_button.dart';
 import 'package:movies_app/presentation/routing/app_router.dart';
 import 'package:movies_app/presentation/widgets/app_dialog.dart';
 import 'package:movies_app/presentation/widgets/logo.dart';
@@ -32,7 +33,6 @@ class NavigationDrawer extends StatelessWidget {
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
               padding: EdgeInsets.symmetric(
@@ -86,6 +86,8 @@ class NavigationDrawer extends StatelessWidget {
                 ],
               ),
             ),
+            const Spacer(),
+            const ToggleThemeButton(),
           ],
         ),
       ),

@@ -1,4 +1,4 @@
-part of 'movie_tabs_bloc.dart';
+part of 'movie_tabs_cubit.dart';
 
 abstract class MovieTabsState extends Equatable {
   final int currentTabIndex;

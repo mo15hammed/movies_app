@@ -4,28 +4,21 @@ import 'package:movies_app/domain/entities/app_error.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/domain/entities/no_params.dart';
 import 'package:movies_app/domain/usecases/get_trending.dart';
-import 'package:movies_app/presentation/blocs/loading/loading_bloc.dart';
+import 'package:movies_app/presentation/blocs/loading/loading_cubit.dart';
 
-part 'movie_carousel_event.dart';
 part 'movie_carousel_state.dart';
 
-class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
-  final LoadingBloc loadingBloc;
+class MovieCarouselCubit extends Cubit<MovieCarouselState> {
+  final LoadingCubit loadingCubit;
   final GetTrending getTrending;
 
-  MovieCarouselBloc({
+  MovieCarouselCubit({
     required this.getTrending,
-    required this.loadingBloc,
-  }) : super(MovieCarouselInitial()) {
-    on<MovieCarouselLoadEvent>(_onLoadCarousel);
-  }
+    required this.loadingCubit,
+  }) : super(MovieCarouselInitial());
 
-  void _onLoadCarousel(
-    MovieCarouselLoadEvent event,
-    Emitter<MovieCarouselState> emit,
-  ) async {
-    loadingBloc.add(StartLoadingEvent());
-
+  void loadCarousel({index = 0}) async {
+    loadingCubit.show();
     final movieEither = await getTrending(NoParams());
 
     movieEither.fold(
@@ -34,13 +27,13 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
         errorType: l.errorType,
       )),
       (movies) {
-        emit(MovieCarouselLoaded(
+        emit(MovieCarouselLoadSuccess(
           movies: movies,
-          defaultIndex: event.defaultIndex,
+          defaultIndex: index,
         ));
       },
     );
 
-    loadingBloc.add(FinishLoadingEvent());
+    loadingCubit.hide();
   }
 }

@@ -4,7 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
-import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
+import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/presentation/blocs/movie_backdrop/movie_backdrop_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovieBackdropWidget extends StatelessWidget {
@@ -20,15 +21,15 @@ class MovieBackdropWidget extends StatelessWidget {
           FractionallySizedBox(
             heightFactor: 1,
             widthFactor: 1,
-            child: BlocBuilder<MovieBackdropBloc, MovieBackdropState>(
-              builder: (context, state) {
-                if (state is MovieBackdropChanged) {
+            child: BlocBuilder<MovieBackdropCubit, MovieEntity?>(
+              builder: (context, movie) {
+                if (movie != null) {
                   return ClipRRect(
                     borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(Sizes.dimen_40.r)
+                      bottom: Radius.circular(Sizes.dimen_40.r),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: state.movie.backdropPath ?? '',
+                      imageUrl: movie.backdropPath ?? '',
                       fit: BoxFit.fitHeight,
                     ),
                   );
