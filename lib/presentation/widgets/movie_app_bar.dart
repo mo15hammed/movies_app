@@ -12,6 +12,7 @@ class MovieAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Sizes.dimen_16),
@@ -23,6 +24,7 @@ class MovieAppBar extends StatelessWidget {
                 'assets/svgs/menu.svg',
                 height: Sizes.dimen_28,
                 matchTextDirection: true,
+                color: colorScheme.onBackground,
               ),
             ),
             const Expanded(
@@ -39,9 +41,9 @@ class MovieAppBar extends StatelessWidget {
                   ),
                 );
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.search,
-                color: Colors.white,
+                color: colorScheme.onBackground,
                 size: Sizes.dimen_28,
               ),
             ),

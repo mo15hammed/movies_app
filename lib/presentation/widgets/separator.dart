@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/themes/app_theme.dart';
 
 class Separator extends StatelessWidget {
   const Separator({Key? key}) : super(key: key);
@@ -18,8 +18,8 @@ class Separator extends StatelessWidget {
         borderRadius: BorderRadius.circular(Sizes.dimen_10.r),
         gradient: const LinearGradient(
           colors: [
-            AppColors.violet,
-            AppColors.royalBlue,
+            AppTheme.violet,
+            AppTheme.royalBlue,
           ]
         )
       ),

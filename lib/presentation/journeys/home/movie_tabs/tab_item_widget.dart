@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
-import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/themes/app_theme.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,7 +30,7 @@ class TabItemWidget extends StatelessWidget {
           border: Border(
             bottom: BorderSide(
               width: Sizes.dimen_2,
-              color: isSelected ? AppColors.royalBlue : Colors.transparent,
+              color: isSelected ? AppTheme.royalBlue : Colors.transparent,
             ),
           ),
         ),

@@ -30,7 +30,8 @@ class AppDialog extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Theme.of(context).primaryColor,
-              blurRadius: Sizes.dimen_8,
+              blurRadius: Sizes.dimen_16,
+              spreadRadius: Sizes.dimen_1,
             ),
           ],
         ),

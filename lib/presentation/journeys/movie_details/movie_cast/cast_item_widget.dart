@@ -15,13 +15,17 @@ class CastItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       width: Sizes.dimen_160.w,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(Sizes.dimen_8.h),
-        border: Border.all(width: Sizes.dimen_0),
+        border: Border.all(
+          width: Sizes.dimen_0,
+          color: theme.primaryColor
+        ),
       ),
       // clipBehavior: Clip.antiAlias,
       child: Column(
@@ -37,7 +41,7 @@ class CastItemWidget extends StatelessWidget {
                 return Container();
               },
               errorWidget: (_, __, ___) => Container(
-                color: Theme.of(context).primaryColor,
+                color: theme.primaryColor,
               ),
             ),
           ),
@@ -51,7 +55,7 @@ class CastItemWidget extends StatelessWidget {
               castItem.name ?? '',
               overflow: TextOverflow.fade,
               maxLines: 1,
-              style: Theme.of(context).textTheme.vulcanBodyText2,
+              style: theme.textTheme.vulcanBodyText2,
             ),
           ),
           Padding(
@@ -64,7 +68,7 @@ class CastItemWidget extends StatelessWidget {
               castItem.character ?? '',
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: Theme.of(context).textTheme.caption,
+              style: theme.textTheme.caption,
             ),
           ),
         ],

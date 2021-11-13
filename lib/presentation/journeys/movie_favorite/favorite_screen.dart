@@ -23,11 +23,7 @@ class FavoriteScreen extends StatelessWidget {
           },
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent,
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-            size: Sizes.dimen_28,
-          ),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
       body: BlocProvider<MovieFavoriteBloc>(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/journeys/loading/loading_screen.dart';
 import 'package:movies_app/presentation/routing/app_router.dart';
-import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/themes/app_theme.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:movies_app/presentation/wiredash_app.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'blocs/loading/loading_cubit.dart';
 import 'blocs/theme/theme_cubit.dart';
 
@@ -33,37 +34,27 @@ class _MovieAppState extends State<MovieApp> {
           create: (context) => ThemeCubit(),
         ),
       ],
-      child: WiredashApp(
-        navigatorKey: _navigatorKey,
-        child: MaterialApp(
-          navigatorKey: _navigatorKey,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          theme: ThemeData(
-            primaryColor: AppColors.vulcan,
-            unselectedWidgetColor: AppColors.royalBlue,
-            colorScheme: ColorScheme.fromSwatch().copyWith(
-              primary: AppColors.royalBlue,
-              secondary: AppColors.violet,
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, theme) {
+          return WiredashApp(
+            navigatorKey: _navigatorKey,
+            child: MaterialApp(
+              navigatorKey: _navigatorKey,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              themeMode: theme,
+              darkTheme: AppTheme.darkTheme,
+              theme: AppTheme.lightTheme,
+              // initialRoute: AppRouter.initial,
+              builder: (context, child) {
+                return LoadingScreen(screen: child);
+              },
+              onGenerateRoute: AppRouter.generateRoute,
             ),
-            scaffoldBackgroundColor: AppColors.vulcan,
-            textTheme: ThemeText.textTheme,
-            appBarTheme: const AppBarTheme(
-              elevation: 0.0,
-              color: Colors.transparent,
-              systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: Colors.transparent,
-              ),
-            ),
-          ),
-          // initialRoute: AppRouter.initial,
-          builder: (context, child) {
-            return LoadingScreen(screen: child);
-          },
-          onGenerateRoute: AppRouter.generateRoute,
-        ),
+          );
+        },
       ),
     );
   }

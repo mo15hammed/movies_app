@@ -13,7 +13,7 @@ class Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/pngs/logo.png',
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.onBackground,
       height: height?.h,
 
     );

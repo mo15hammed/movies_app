@@ -1,6 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/themes/app_theme.dart';
 
 class LoadingWidget extends StatelessWidget {
   final double size;
@@ -16,11 +16,11 @@ class LoadingWidget extends StatelessWidget {
       child: SizedBox(
         height: size,
         width: size,
-        child: const FlareActor(
+        child: FlareActor(
           'assets/animations/loading_circle.flr',
           animation: 'load',
           snapToEnd: true,
-          color: AppColors.royalBlue,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
     );

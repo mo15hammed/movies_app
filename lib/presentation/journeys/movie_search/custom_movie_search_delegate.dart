@@ -4,7 +4,7 @@ import 'package:movies_app/common/constants/locale_keys.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/presentation/blocs/movie_search/movie_search_bloc.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/app_error_widget.dart';
-import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/themes/app_theme.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -34,7 +34,7 @@ class CustomMovieSearchDelegate extends SearchDelegate {
         onPressed: query.isEmpty ? null : () => query = '',
         icon: Icon(
           Icons.clear,
-          color: query.isEmpty ? Colors.grey : AppColors.royalBlue,
+          color: query.isEmpty ? Colors.grey : AppTheme.royalBlue,
           size: Sizes.dimen_28.sp,
         ),
       ),

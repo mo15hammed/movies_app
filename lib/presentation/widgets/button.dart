@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
-import 'package:movies_app/presentation/themes/app_colors.dart';
+import 'package:movies_app/presentation/themes/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Button extends StatelessWidget {
@@ -22,8 +22,8 @@ class Button extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-            AppColors.violet,
-            AppColors.royalBlue,
+            AppTheme.violet,
+            AppTheme.royalBlue,
           ],
         ),
         borderRadius: BorderRadius.circular(Sizes.dimen_20.r),
