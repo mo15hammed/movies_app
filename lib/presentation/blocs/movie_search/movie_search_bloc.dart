@@ -16,7 +16,6 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
   MovieSearchBloc({
     required this.getSearchedMovies,
     required this.loadingCubit,
-
   }) : super(MovieSearchInitial()) {
     on<SearchQueryChangedEvent>(_onSearchQueryChanged);
   }
@@ -25,7 +24,7 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
     SearchQueryChangedEvent event,
     Emitter<MovieSearchState> emit,
   ) async {
-    loadingCubit.show();
+    emit(MovieSearchLoading());
 
     final moviesEither =
         await getSearchedMovies(SearchParams(query: event.query));
@@ -38,7 +37,5 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
       )),
       (movies) => emit(MovieSearchLoadSuccess(movies)),
     );
-
-    loadingCubit.hide();
   }
 }

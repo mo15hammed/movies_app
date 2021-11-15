@@ -7,6 +7,8 @@ import 'package:movies_app/presentation/blocs/movie_cast/movie_cast_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_details/movie_details_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_favorite/movie_favorite_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/presentation/journeys/home/movie_carousel/app_error_widget.dart';
+import 'package:movies_app/presentation/journeys/loading/loading_widget.dart';
 import 'package:movies_app/presentation/routing/app_router.dart';
 import 'package:movies_app/presentation/widgets/button.dart';
 import 'movie_cast/movie_cast_widget.dart';
@@ -41,7 +43,9 @@ class MovieDetailsScreen extends StatelessWidget {
         child: BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
           listener: (context, state) {
             if (state is MovieDetailsSuccess) {
-              context.read<MovieFavoriteBloc>().add(CheckFavoriteMoviesEvent(state.movie.id));
+              context
+                  .read<MovieFavoriteBloc>()
+                  .add(CheckFavoriteMoviesEvent(state.movie.id));
             }
           },
           builder: (context, state) {
@@ -88,10 +92,19 @@ class MovieDetailsScreen extends StatelessWidget {
                   ],
                 ),
               );
-            } else if (state is MovieDetailsError) {
-              return Container();
             }
-            return const SizedBox.shrink();
+            if (state is MovieDetailsError) {
+              return AppErrorWidget(
+                message: state.message,
+                errorType: state.errorType,
+                onRetryPressed: () {
+                  context
+                      .read<MovieDetailsBloc>()
+                      .add(MovieDetailsLoadEvent(movieId));
+                },
+              );
+            }
+            return LoadingWidget(size: Sizes.dimen_200.w);
           },
         ),
       ),

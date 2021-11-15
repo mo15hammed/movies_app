@@ -4,6 +4,7 @@ import 'package:movies_app/common/constants/locale_keys.dart';
 import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/presentation/blocs/movie_search/movie_search_bloc.dart';
 import 'package:movies_app/presentation/journeys/home/movie_carousel/app_error_widget.dart';
+import 'package:movies_app/presentation/journeys/loading/loading_widget.dart';
 import 'package:movies_app/presentation/themes/app_theme.dart';
 import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,11 +56,6 @@ class CustomMovieSearchDelegate extends SearchDelegate {
   }
 
   @override
-  void showResults(BuildContext context) {
-    super.showResults(context);
-  }
-
-  @override
   Widget buildResults(BuildContext context) {
     if (query.isNotEmpty) {
       bloc.add(SearchQueryChangedEvent(query));
@@ -104,7 +100,7 @@ class CustomMovieSearchDelegate extends SearchDelegate {
             itemCount: movies.length,
           );
         }
-        return const SizedBox.shrink();
+        return LoadingWidget(size: Sizes.dimen_200.w);
       },
     );
   }

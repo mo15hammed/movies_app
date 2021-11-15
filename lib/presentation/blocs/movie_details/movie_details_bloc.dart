@@ -21,9 +21,10 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   }
 
   void _onMovieDetailLoad(
-      MovieDetailsLoadEvent event, Emitter<MovieDetailsState> emit) async {
-    loadingCubit.show();
-
+    MovieDetailsLoadEvent event,
+    Emitter<MovieDetailsState> emit,
+  ) async {
+    emit(MovieDetailsLoading());
     final movieEither = await getMovieDetails(MovieParams(event.movieId));
 
     movieEither.fold(
@@ -37,8 +38,5 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
         emit(MovieDetailsSuccess(movie));
       },
     );
-
-    loadingCubit.hide();
-
   }
 }
