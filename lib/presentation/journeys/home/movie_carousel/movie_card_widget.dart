@@ -16,11 +16,15 @@ class MovieCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      elevation: Sizes.dimen_32,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(Sizes.dimen_16.r),
+      ),
+      margin: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
+      child: Material(
+        color: Colors.transparent,
+        elevation: Sizes.dimen_32,
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(
@@ -28,12 +32,9 @@ class MovieCardWidget extends StatelessWidget {
               arguments: movieId,
             );
           },
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(Sizes.dimen_16.r),
-            child: CachedNetworkImage(
-              imageUrl: posterPath,
-              fit: BoxFit.cover,
-            ),
+          child: CachedNetworkImage(
+            imageUrl: posterPath,
+            fit: BoxFit.cover,
           ),
         ),
       ),

@@ -17,7 +17,7 @@ class AppRouter {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case details:
-        final movieId = settings.arguments as int;
+        final movieId = (settings.arguments ?? 0) as int;
         return FadePageRouteBuilder(
           builder: (context) => MovieDetailsScreen(movieId: movieId),
           settings: settings,

@@ -34,6 +34,8 @@ class BigPosterWidget extends StatelessWidget {
           )),
           child: CachedNetworkImage(
             imageUrl: movie.posterPath,
+            placeholder: (_, __) => SizedBox(height: Sizes.dimen_400, width: 1.sw),
+            errorWidget: (_, __, ___) => SizedBox(height: Sizes.dimen_400, width: 1.sw),
             width: 1.sw,
             fit: BoxFit.cover,
           ),
