@@ -35,6 +35,7 @@ class BigPosterWidget extends StatelessWidget {
           child: CachedNetworkImage(
             imageUrl: movie.posterPath,
             width: 1.sw,
+            fit: BoxFit.cover,
           ),
         ),
         Positioned(

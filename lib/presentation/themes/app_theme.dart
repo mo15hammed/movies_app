@@ -36,7 +36,7 @@ abstract class AppTheme {
       appBarTheme: AppBarTheme(
         elevation: 0.0,
         color: Colors.transparent,
-        titleTextStyle: ThemeText.lightTextTheme.headline6,
+        titleTextStyle: ThemeText.darkTextTheme.headline6,
         iconTheme: IconThemeData(
           color: darkColorScheme.onBackground,
           size: Sizes.dimen_28.sp,
@@ -66,7 +66,7 @@ abstract class AppTheme {
           color: lightColorScheme.onBackground,
           size: Sizes.dimen_28.sp,
         ),
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarIconBrightness: Brightness.dark,

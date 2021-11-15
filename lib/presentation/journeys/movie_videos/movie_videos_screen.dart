@@ -133,7 +133,6 @@ class _MovieVideosScreenState extends State<MovieVideosScreen> {
                       return Column(
                         children: [
                           player,
-                          // SizedBox(height: Sizes.dimen_16.h),
                           Expanded(
                             child: ListView.separated(
                               itemCount: _videos.length,

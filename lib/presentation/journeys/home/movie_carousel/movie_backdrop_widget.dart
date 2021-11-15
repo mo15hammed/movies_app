@@ -30,7 +30,7 @@ class MovieBackdropWidget extends StatelessWidget {
                     ),
                     child: CachedNetworkImage(
                       imageUrl: movie.backdropPath ?? '',
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.cover,
                     ),
                   );
                 }
