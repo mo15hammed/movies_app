@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/common/constants/size_constants.dart';
 import 'package:movies_app/di/get_it.dart';
 import 'package:movies_app/presentation/journeys/loading/loading_screen.dart';
 import 'package:movies_app/presentation/routing/app_router.dart';
 import 'package:movies_app/presentation/themes/app_theme.dart';
-import 'package:movies_app/presentation/themes/theme_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:movies_app/presentation/wiredash_app.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'blocs/loading/loading_cubit.dart';
 import 'blocs/theme/theme_cubit.dart';
 
@@ -31,7 +27,7 @@ class _MovieAppState extends State<MovieApp> {
           create: (context) => getItInstance(),
         ),
         BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit(),
+          create: (context) => getItInstance(),
         ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(

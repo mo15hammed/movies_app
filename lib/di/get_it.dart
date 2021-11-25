@@ -26,12 +26,12 @@ import 'package:movies_app/presentation/blocs/movie_favorite/movie_favorite_bloc
 import 'package:movies_app/presentation/blocs/movie_search/movie_search_bloc.dart';
 import 'package:movies_app/presentation/blocs/movie_tabs/movie_tabs_cubit.dart';
 import 'package:movies_app/presentation/blocs/movie_videos/movie_videos_bloc.dart';
+import 'package:movies_app/presentation/blocs/theme/theme_cubit.dart';
 
 final getItInstance = GetIt.I;
 
 void init() {
   /// All dependencies goes here!
-
   getItInstance.registerLazySingleton<Dio>(() => Dio());
   getItInstance.registerLazySingleton<DioHelper>(
     () => DioHelper(getItInstance()),
@@ -51,6 +51,7 @@ void init() {
 
   // use cases
   getItInstance.registerSingleton<LoadingCubit>(LoadingCubit());
+  getItInstance.registerSingleton<ThemeCubit>(ThemeCubit());
 
   getItInstance.registerLazySingleton<GetTrending>(
     () => GetTrending(getItInstance()),
@@ -124,7 +125,6 @@ void init() {
       getSearchedMovies: getItInstance(),
     ),
   );
-
   getItInstance.registerFactory<MovieFavoriteBloc>(
     () => MovieFavoriteBloc(
       getFavoriteMovies: getItInstance(),

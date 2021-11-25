@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
         ),
         BlocProvider<MovieTabsCubit>(
           create: (_) =>
-              getItInstance<MovieTabsCubit>()..changeTab(),
+              getItInstance<MovieTabsCubit>()..changeMovieTab(),
         ),
         BlocProvider<MovieSearchBloc>(
           create: (_) => getItInstance<MovieSearchBloc>(),

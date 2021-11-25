@@ -20,7 +20,7 @@ class MovieTabsCubit extends Cubit<MovieTabsState> {
     required this.getComingSoon,
   }) : super(MovieTabsInitial());
 
-  void changeTab({index = 0}) async {
+  void changeMovieTab({index = 0}) async {
     emit(MovieTabLoading(currentTabIndex: index));
 
     final tabActions = [

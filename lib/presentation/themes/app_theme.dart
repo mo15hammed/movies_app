@@ -23,7 +23,6 @@ abstract class AppTheme {
     onPrimary: Colors.grey[200],
     onBackground: vulcan,
     secondary: violet,
-
   );
 
   static ThemeData get darkTheme {

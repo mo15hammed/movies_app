@@ -16,7 +16,7 @@ class MovieTabBarWidget extends StatelessWidget {
   }) : super(key: key);
 
   void _onTabTapped(BuildContext context, int index) {
-    context.read<MovieTabsCubit>().changeTab(index: index);
+    context.read<MovieTabsCubit>().changeMovieTab(index: index);
   }
 
   @override
@@ -53,7 +53,7 @@ class MovieTabBarWidget extends StatelessWidget {
                   onRetryPressed: () {
                     context
                         .read<MovieTabsCubit>()
-                        .changeTab(index: state.currentTabIndex);
+                        .changeMovieTab(index: state.currentTabIndex);
                   },
                 ),
             ],
